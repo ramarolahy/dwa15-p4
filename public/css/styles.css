@@ -1,0 +1,145 @@
+.container {
+    min-width: 1200px;
+}
+.text__top {
+    color: #fff;
+    line-height: 1.3;
+    font-size: 28px;
+}
+
+a {
+    text-decoration: none;
+}
+
+.mdl-card {
+    position: relative;
+}
+
+.quote-text__bg {
+    background-color: rgba(0,0,0,0.50);
+}
+
+.quote-text {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.default_quote {
+    text-align: center;
+    height: 500px;
+    padding-top: 200px;
+}
+
+.mdl-textfield {
+    width: 100%;
+}
+
+
+.wrap-quote {
+    width:608px;
+    height:500px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.mdl-card__title-text {
+    display: inline-block;
+    align-self: normal;
+}
+
+.wrap-card-body__radio {
+    align-content: center;
+}
+
+.col-7 {
+    position: relative;
+}
+#quoteImg {
+    position: absolute;
+    z-index: 2;
+    top:0;
+}
+
+[type=radio] {
+    position: absolute;
+    opacity: 0;
+}
+
+[type=radio] + img {
+    width: 60px;
+    height: 40px;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+[type=radio]:checked + img {
+    -webkit-box-shadow: 0 0 3px 2px cadetblue;
+    -moz-box-shadow: 0 0 3px 2px cadetblue;
+    box-shadow: 0 0 3px 2px cadetblue;
+}
+
+.alert-info {
+    width: 608px;
+}
+div.mdl-button.mdl-button--primary.mdl-button--icon.mdl-button--file{
+    right: 0px;
+}
+.mdl-button--file input {
+    cursor: pointer;
+    height: 100%;
+    right: 0;
+    opacity: 0;
+    position: relative;
+    top: 0;
+    width: 100%;
+    z-index: 4;
+}
+span.small {
+    color: darkseagreen;
+    font-size: 0.5em;
+}
+.mdl-textfield--file.mdl-textfield__input {
+    box-sizing: border-box;
+    width: 100%;
+}
+.mdl-textfield--file.mdl-button--file {
+    position: absolute;
+    right: 0;
+}
+
+
+div.alert.alert-danger {
+    padding: 0;
+    color: crimson;
+    border: none;
+    background: none;
+    position: relative;
+    top: -15px;
+}
+
+#search {
+    width: 300px;
+}
+
+/* Quotes image card */
+.demo-card-square.mdl-card {
+    width: 320px;
+    height: 320px;
+}
+.demo-card-square > .mdl-card__title {
+    color: #fff;
+    background:
+        url('../images/fall.jpg') bottom right 15% no-repeat #46B6AC;
+}
+.material-icons {
+    padding-left: 1px !important;
+    padding-right: 1px !important;
+}
+.material-icons__edit {
+    color: #1d68a7;
+}
+.material-icons__delete {
+    color: indianred;
+}
