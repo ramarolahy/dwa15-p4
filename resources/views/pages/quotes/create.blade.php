@@ -19,12 +19,12 @@
             <div class="col-5 pl-5">
                 <form method="POST" action="/new" enctype="multipart/form-data">
                     {{ csrf_field () }}
+                    <input type="hidden" name="posterId" value="{{$posterId}}">
                     <div class="card border-0 px-4 pb-2">
                         <!-- Background selection -->
                         <div class="card-body">
-                            <h5 class="mdl-card__title-text">Choose Background<br><span class="small">(Leave empty for a
-                                                                                                      random
-                                                                                                      background)</span>
+                            <h5 class="mdl-card__title-text">Choose Background<br>
+                                <span class="small">(Leave empty for a random background)</span>
                             </h5>
                         </div>
                         {{--                            I will keep trying to figure this one out for the final project--}}
@@ -37,62 +37,31 @@
                         {{--                                </div>--}}
                         {{--                            </div>--}}
                         <div class="card-body row wrap-card-body__radio">
-                            <div class="col-3">
-                                <label class="" for="option-1">
-                                    <input type="radio" id="option-1"
-                                           class="mdl-radio__button"
-                                           name="selectedImg"
-                                           value="road.jpeg"
-                                           onclick="document.getElementById('myQuote').style.backgroundImage = url({{ asset('/images/road.jpeg') }})"
-                                           @if ( $selectedImg === "road.jpeg" ) checked @endif >
-                                    <img src="{{ asset('/images/road.jpeg') }} " alt="road">
-                                </label>
-                            </div>
-                            <div class="col-3">
-                                <label for="option-2">
-                                    <input type="radio" id="option-2"
-                                           class="mdl-radio__button"
-                                           name="selectedImg"
-                                           value="fall.jpg"
-                                           @if ( $selectedImg === "fall.jpg" ) checked @endif >
-                                    <img src="{{ asset('/images/fall.jpg') }}" alt="fall">
-                                </label>
-                            </div>
-                            <div class="col-3">
-                                <label class="" for="option-3">
-                                    <input type="radio" id="option-3"
-                                           class="mdl-radio__button"
-                                           name="selectedImg"
-                                           value="butterflies.jpeg"
-                                           @if ( $selectedImg === "butterflies.jpeg" ) checked @endif >
-                                    <img src="{{ asset('/images/butterflies.jpeg') }}" alt="butterflies">
-                                </label>
-                            </div>
-                            <div class="col-3">
-                                <label class="" for="option-4">
-                                    <input type="radio" id="option-4"
-                                           class="mdl-radio__button"
-                                           name="selectedImg"
-                                           value="leaves.jpeg"
-                                           @if ( $selectedImg === "leaves.jpeg" ) checked @endif >
-                                    <img src="{{ asset('/images/leaves.jpeg') }}" alt="leaves">
-                                </label>
-                            </div>
+                            @foreach($backgrounds as $choice)
+                                <div class="col-3">
+                                    <label class="" for='{{$choice->id}}-{{$choice->filename}}'>
+                                        <input type="radio" id='{{$choice->id}}-{{$choice->filename}}'
+                                               class="mdl-radio__button"
+                                               name="selectedBg"
+                                               data-id="{{$choice->id}}"
+                                               value={{$choice->filename}}
+                                               @if ( $selectedBg === $choice->filename ) checked @endif >
+                                        <img src="{{ asset('/images/' . $choice->filename) }} " alt="road">
+                                    </label>
+                                </div>
+                            @endforeach
                         </div>
                         <!-- END Background selection -->
 
                         <!-- Quote and Author input -->
                         <div class="card-body">
                             <h5 class="mdl-card__title-text">Add your quote</h5>
-
                             <div class="mdl-textfield mdl-js-textfield">
                                 <!--If filled, leave text on input area
                                 in case
                                     the user needs to make correction-->
                                 <textarea class="mdl-textfield__input" rows="3" id="quote" name="quote">{{ $quote ? $quote : null }}</textarea>
-                                <label class="mdl-textfield__label"
-                                       for="quote">*Enter nice quote here...</label>
-
+                                <label class="mdl-textfield__label" for="quote">*Enter nice quote here...</label>
                             </div>
                             <!--If left empty, print error message-->
                             @include('includes._error_field', ['fieldName' => 'quote'])
@@ -123,16 +92,16 @@
                                     <div class="col-10">
                                         <label
                                             class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
-                                            for="addBackground">
+                                            for="addTxtBg">
                                             <!--If previously checked,
                                             leave checked, unless there
                                             was error-->
                                             <input type="checkbox"
-                                                   id="addBackground"
+                                                   id="addTxtBg"
                                                    class="mdl-checkbox__input"
-                                                   name="addBackground"
-                                                   value="true"
-                                                   @if ( isset( $addBackground ) and $addBackground and !$errors ) checked @endif
+                                                   name="addTxtBg"
+                                                   value="1"
+                                                   @if ( isset( $addTxtBg ) and $addTxtBg and !$errors ) checked @endif
                                             >
                                             <span
                                                 class="mdl-checkbox__label mdl-card__title-text">Add Text
@@ -188,26 +157,35 @@
                             <span class="text__top">"A nice quote for a nice day!"</span><br>
                             <span class="text__top">~~~</span>
                         </div>
-                    @endif
-                    <!--Add text background if no errors-->
-                    <div class="@if ( isset( $addBackground ) and $addBackground and count($errors) == 0 ) {{ $textBg }} @endif quote-text text-center py-5">
-                        <!--If there are no errors, print quote and
-                        author-->
-                        <span
-                            class="text__top">{{ count($errors) == 0 ? $quote : null }}</span>
-                        <br><br>
-                        <span
-                            class="text__top">@if ( count($errors) == 0 and $author != "" ) ~~ {{ $author }} ~~ @endif
-                        </span>
-                    </div>
+                    @else
+                        <div class="py-5 @if ( isset( $addTxtBg ) and $addTxtBg ) {{ $textBg }} @endif quote-text text-center ">
+                            <!--If there are no errors, print quote and
+                            author-->
+                            <span class="my-5 text__top">"{{ $quote }}"</span>
+                            <br><br>
+                            <span class="text__top">{{ $author }}</span>
+                        </div>
+
+                @endif
+                <!--Add text background if no errors-->
                 </div>
                 <!-- END Poster div -->
-
                 <br>
-                <!-- Info -->
-                <p class="alert-info pl-3">Right click on image, and
-                                           choose <b>Save Image As...</b> to save your new quote card.
-                </p>
+                @if ( count($errors) == 0 and $quote)
+                    <form action="/save{{$posterId ? '/'.$posterId : null}}" method="POST" enctype="multipart/form-data">
+                        {{ csrf_field () }}
+                        <input type="hidden" id="posterId" name="posterId" value="{{$posterId}}">
+                        <input type="hidden" id="background_id" name="background_id" value="{{$imgBg_id}}">
+                        <input type="hidden" id="quote" name="quote" value="{{$quote}}">
+                        <input type="hidden" id="author" name="author" value="{{$author}}">
+                        <input type="hidden" id="text_background" name="text_background" value="{{$addTxtBg}}">
+                        <input type="hidden" id="file" name="file">
+                        <button class=" float-right mdl-button mdl-js-button mdl-button--raised
+                                mdl-js-ripple-effect mdl-button--accent text-white button-save"
+                                type="submit"> Save Poster
+                        </button>
+                    </form>
+                @endif
             </div>
             <!-- END Quote poster-->
         </div>
@@ -217,10 +195,15 @@
 @stop
 
 @section('script')
-    html2canvas(document.getElementById("myQuote")).then(canvas => {
-    document.getElementById("quoteImg").appendChild(canvas)
-    });
-    document.getElementById("uploadBtn").onchange = function () {
-    document.getElementById("uploadFile").value = this.files[0].name;
-    };
+    {{-- Add scripts here--}}
+    <script>
+        html2canvas(document.getElementById("myQuote")).then(canvas => {
+            document.getElementById("quoteImg").appendChild(canvas);
+            const fileElement = document.getElementById('file');
+            if (fileElement) {
+                fileElement.value = canvas.toDataURL("image/png");
+                //.replace("image/png", "image/octet-stream");
+            }
+        });
+    </script>
 @stop

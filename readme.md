@@ -13,6 +13,8 @@
     To change div into a canvas.
 + pexels: https://www.pexels.com/
     This is where I got the background images
++ https://stackoverflow.com/questions/11511511/how-to-save-a-png-image-server-side-from-a-base64-data-string
++ https://www.iconfinder.com/search/?q=plus&price=free
 
 ## 3 Unique inputs
 + radio inputs for background images
@@ -22,6 +24,7 @@
 
 ## Packages
 + barryvdh/laravel-debugbar
++ intervention/image
 
 
 ## Feature summary

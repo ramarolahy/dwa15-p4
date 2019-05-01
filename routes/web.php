@@ -6,6 +6,9 @@
     Route::get ( '/','QuoteController@home')->name('quotes.home');
     Route::get ( '/create','QuoteController@create')->name('quotes.create');
     Route::post ( '/new','QuoteController@new')->name('quotes.new');
+    Route::post ('/save/{posterId?}', 'QuoteController@save')->name('quotes.save');
+    Route::post ('/edit', 'QuoteController@edit')->name('quotes.edit');
+    Route::post ('/delete/{posterId}', 'QuoteController@delete')->name('quotes.delete');
 
     Route::get('/debug', function () {
 
