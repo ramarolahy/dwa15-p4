@@ -28,8 +28,8 @@
                 // Delete old image file from storage
                 $oldFilename = $poster->filename;
                 $oldFilePath = 'uploads/'.$oldFilename;
-                if(File::exists($oldFilePath)) {
-                    File::delete($oldFilePath);
+                if (File::exists ($oldFilePath)) {
+                    File::delete ($oldFilePath);
                 }
             }
             $author = \request ('author');
@@ -98,8 +98,8 @@
                 // DELETE poster
                 $poster->delete ();
                 // DELETE image file from public folder if it exists
-                if(File::exists($imagePath)) {
-                    File::delete($imagePath);
+                if (File::exists ($imagePath)) {
+                    File::delete ($imagePath);
                 }
                 // Reload page
                 return redirect ()->route ('quotes.home');
@@ -125,6 +125,19 @@
 
             //dump($posters);
             return view ('pages.quotes.home', $state);
+        }
+
+
+        public function search (Request $request) {
+            $validateData = $request->validate ([
+                                                    'filter'     => 'required',
+                                                    'searchTerm' => 'required',
+                                                ]);
+            $filter = $validateData['filter'];
+            $searchTerm = htmlentities ($validateData['searchTerm']);
+            $term = '%'.$searchTerm.'%';
+            $posters = Poster::where ($filter, 'LIKE', $term)->get ();
+            return view ('pages.quotes.home', ['posters' => $posters]);
         }
 
         /**
@@ -176,8 +189,8 @@
                 $imgBg = asset ('/images/'.$randFile);
             }
             $posterId = \request ('posterId');
-            $quote = $validateData['quote'];
-            $author = $validateData['author'];
+            $quote = htmlentities ($validateData['quote']);
+            $author = htmlentities ($validateData['author']);
             $addTxtBg = \request ('addTxtBg');
             $textBg = 'quote-text__bg';
 

@@ -173,6 +173,7 @@
                 <br>
                 @if ( count($errors) == 0 and $quote)
                     <form action="/save{{$posterId ? '/'.$posterId : null}}" method="POST" enctype="multipart/form-data">
+                        {{$posterId ? method_field('put') : null}}
                         {{ csrf_field () }}
                         <input type="hidden" id="posterId" name="posterId" value="{{$posterId}}">
                         <input type="hidden" id="background_id" name="background_id" value="{{$imgBg_id}}">

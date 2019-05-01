@@ -272,4 +272,13 @@ button.close:hover {
 button.close:focus {
     outline: none;
 }
+.mdl-textfield {
+    position: relative;
+}
+.fas.fa-search {
+    font-size: 1.5em;
+    position: absolute;
+    left: 0px;
+    color: #3b9388;
+}
 

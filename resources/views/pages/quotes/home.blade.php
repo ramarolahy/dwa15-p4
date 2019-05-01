@@ -6,35 +6,33 @@
     <div class="card pt-5 pb-0 px-5 border-0 bg-light">
         {{-- Add overlay here --}}
         <div class="row px-4">
-            <form class="col-12 form-inline clearfix" action="">
-                <div class="form-group float-left">
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mx-2">
-                        <input class="mdl-textfield__input " type="text" id="search" placeholder="Search by author or topic">
-                    </div>
-                </div>
-                <div class="float-right form-group mx-3 ">
-                    <span class="mdl-radio__label">Filter by: </span>
+            <form id="form-search" class="col-10 form-inline" method="POST" action="/search">
+                {{ csrf_field () }}
+                <div class="float-right form-group">
+                    <span class="mdl-radio__label mr-4">Filter by: </span>
                     <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect mx-2" for="author">
-                        <input type="radio" id="author" class="mdl-radio__button" name="filter" value="1" checked>
-                        <span class="mdl-radio__label">By Author</span>
+                        <input type="radio" id="author" class="mdl-radio__button" name="filter" value="author" checked>
+                        <span class="mdl-radio__label">Author</span>
                     </label>
                     <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect mx-2" for="topic">
-                        <input type="radio" id="topic" class="mdl-radio__button" name="filter" value="1">
-                        <span class="mdl-radio__label">By Author</span>
+                        <input type="radio" id="topic" class="mdl-radio__button" name="filter" value="quote">
+                        <span class="mdl-radio__label">Keyword</span>
                     </label>
                 </div>
-                <div class="float-right form-group mx-3">
-                    <span class="mdl-radio__label">Sort results: </span>
-                    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect mx-2" for="a-to-z">
-                        <input type="radio" id="a-to-z" class="mdl-radio__button" name="sorting" value="1" checked>
-                        <span class="mdl-radio__label">A - Z</span>
-                    </label>
-                    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect mx-2" for="z-to-a">
-                        <input type="radio" id="z-to-a" class="mdl-radio__button" name="sorting" value="1">
-                        <span class="mdl-radio__label">Z - A</span>
-                    </label>
+                <div class="form-group mx-auto w-auto">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mx-2">
+                        <i class="fas fa-search"></i>
+                        <input class="mdl-textfield__input pl-5 " type="text" id="search" name="searchTerm" placeholder="Search for a poster..." required>
+                    </div>
                 </div>
-
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" type="submit">
+                    Search
+                </button>
+            </form>
+            <form id="form-reset" class="col-2 form-inline px-0" action="/">
+                <button class="ml-5 mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="submit">
+                    Reset
+                </button>
             </form>
         </div>
     </div>
@@ -46,10 +44,12 @@
                         <div class="mx-4 my-3 demo-card-image mdl-card mdl-shadow--2dp "
                              style="background-image:url('{{asset ('uploads/' . $poster->filename)}}')">
                             <div class="mdl-card__actions clearfix">
-                                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect button-action button-action--share float-left" href='{{"https://www.facebook.com/sharer/sharer.php?u=".asset ('uploads/' . $poster->filename)}}' target="_blank">
+                                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect button-action button-action--share float-left" href='#'
+                                   onClick="MyWindow=window.open('{{"https://www.facebook.com/sharer/sharer.php?u=".URL::asset('uploads/'.$poster->filename)."&display=popup"}}','facebook',width='600'); return false;">
                                     Share
                                 </a>
                                 <form action="{{'/delete/'.$poster->id}}" method="POST">
+                                    {{ method_field('delete') }}
                                     {{csrf_field ()}}
                                     <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect button-action button-action--delete float-right" type="submit">
                                         <i class="material-icons">delete</i></button>
