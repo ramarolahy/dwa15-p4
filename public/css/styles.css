@@ -16,6 +16,25 @@
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
 }
 
+a {
+    text-decoration: none !important;
+}
+
+.mdl-layout-title{
+    font-family: "Fredoka One", sans-serif;
+    font-size: 1.8em;
+    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.44);
+}
+
+.mdl-layout-title:hover {
+    color: white;
+}
+
+.mdl-navigation__link:hover {
+    font-weight: bolder;
+    color: white;
+}
+
 .container {
     min-width: 1200px;
 }
