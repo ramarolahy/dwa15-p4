@@ -23,7 +23,14 @@
                 $poster = new Poster ();
             }
             else {
+                // Retrieve poster from db
                 $poster = Poster::where ('id', '=', $posterId)->first ();
+                // Delete old image file from storage
+                $oldFilename = $poster->filename;
+                $oldFilePath = 'uploads/'.$oldFilename;
+                if(File::exists($oldFilePath)) {
+                    File::delete($oldFilePath);
+                }
             }
             $author = \request ('author');
             $quote = \request ('quote');

@@ -38,12 +38,12 @@
             </form>
         </div>
     </div>
-    <div class="card container-list--posters pt-0 pb-5 px-3 border-0 bg-light">
-        <div class="centered mx-auto">
+    <div class="card container-list--posters pt-0 pb-5 px-5 border-0 bg-light">
+        <div class="centered mx-auto px-5">
             <div class="row d-flex justify-content-start">
                 @foreach ($posters as $poster)
                     <label for="{{'modal_btn_'.$poster->id}}">
-                        <div class="mx-3 my-3 demo-card-image mdl-card mdl-shadow--2dp "
+                        <div class="mx-4 my-3 demo-card-image mdl-card mdl-shadow--2dp "
                              style="background-image:url('{{asset ('uploads/' . $poster->filename)}}')">
                             <div class="mdl-card__actions clearfix">
                                 <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect button-action button-action--share float-left" href='{{"https://www.facebook.com/sharer/sharer.php?u=".asset ('uploads/' . $poster->filename)}}' target="_blank">
@@ -81,7 +81,7 @@
                     </div>
                 @endforeach
                 <a href="/create">
-                    <div class="mx-3 my-3 mdl-shadow--2dp" id="addButton" style="background-image:url('{{asset ('images/plus-square.svg')}}')">
+                    <div class="mx-4 my-3 mdl-shadow--2dp" id="addButton" style="background-image:url('{{asset ('images/plus-square.svg')}}')">
                     </div>
                 </a>
 
