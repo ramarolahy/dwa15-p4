@@ -3,13 +3,14 @@
     namespace App\Http\Controllers;
 
     use Illuminate\Http\Request;
+    use Illuminate\Support\Facades\File;
     use Intervention\Image\ImageManager;
     use App\Poster;
     use App\Background;
 
     class QuoteController extends Controller {
 
-        /***** CREATE *****
+        /***** CREATE AND UPDATE *****
          * Method to save new poster to the db, and save poster image to the
          * uploads directory.
          * @param Request $request
@@ -81,12 +82,18 @@
          */
         public function delete (int $posterId) {
             $poster = Poster::where ('id', '=', $posterId)->first ();
+            $filename = $poster->filename;
+            $imagePath = 'uploads/'.$filename;
             if ( !$poster) {
                 dump ('No poster found.');
             }
             else {
                 // DELETE poster
                 $poster->delete ();
+                // DELETE image file from public folder if it exists
+                if(File::exists($imagePath)) {
+                    File::delete($imagePath);
+                }
                 // Reload page
                 return redirect ()->route ('quotes.home');
             }
