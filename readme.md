@@ -15,6 +15,7 @@
     This is where I got the background images
 + https://stackoverflow.com/questions/11511511/how-to-save-a-png-image-server-side-from-a-base64-data-string
 + https://www.iconfinder.com/search/?q=plus&price=free
++ https://laracasts.com/discuss/channels/general-discussion/facebook-share?page=0
 
 ## 3 Unique inputs
 + radio inputs for background images
