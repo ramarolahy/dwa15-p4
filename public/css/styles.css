@@ -21,8 +21,12 @@ a {
 }
 
 .mdl-layout-title{
-    font-family: "Fredoka One", sans-serif;
-    font-size: 1.8em;
+    position: relative;
+    left: -30px;
+    bottom: -17px;
+    font-family: Noteworthy, sans-serif;
+    font-weight: bolder;
+    font-size: 3em;
     text-shadow: 0 1px 5px rgba(0, 0, 0, 0.44);
 }
 
