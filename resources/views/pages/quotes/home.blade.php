@@ -40,35 +40,34 @@
         <div class="centered mx-auto pt-3">
             <div class="row d-flex justify-content-start">
                 @foreach ($posters as $poster)
-                    <label for="{{'modal_btn_'.$poster->id}}">
-                        <div class=" mx-3 my-3 demo-card-image mdl-card mdl-shadow--2dp "
-                             style="background-image:url('{{asset ('uploads/' . $poster->filename)}}')">
-                            <div class="mdl-card__actions clearfix">
-                                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect button-action button-action--share float-left" href='#'
-                                   onClick="MyWindow=window.open('{{"https://www.facebook.com/sharer/sharer.php?u=".URL::asset('uploads/'.$poster->filename)."&display=popup"}}','MyWindow',width='600'); return false;">
-                                    Share
-                                </a>
-                                <form action="{{'/delete/'.$poster->id}}" method="POST">
-                                    {{ method_field('delete') }}
-                                    {{csrf_field ()}}
-                                    <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect button-action button-action--delete float-right" type="submit">
-                                        <i class="material-icons">delete</i></button>
-                                </form>
-                                <form action="/edit" method="POST" enctype="multipart/form-data">
-                                    {{ csrf_field () }}
-                                    <input type="hidden" name="posterId" value="{{$poster->id}}">
-                                    <input type="hidden" name="background_id" value="{{$poster->background_id}}">
-                                    <input type="hidden" name="quote" value="{{$poster->quote}}">
-                                    <input type="hidden" name="author" value="{{$poster->author}}">
-                                    <input type="hidden" name="text_background" value="{{$poster->text_background}}">
-                                    <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect button-action button-action--edit float-right" href="">
-                                        <i class="material-icons">edit</i>
-                                    </button>
-                                </form>
-                            </div>
+                    <div class=" mx-3 my-3 demo-card-image mdl-card mdl-shadow--2dp "
+                         style="background-image:url('{{asset ('uploads/' . $poster->filename)}}')">
+                        <div class="mdl-card__actions clearfix">
+                            <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect button-action button-action--share float-left" href='#'
+                               onClick="MyWindow=window.open('{{"https://www.facebook.com/sharer/sharer.php?u=".URL::asset('uploads/'.$poster->filename)."&display=popup"}}','MyWindow',width='600'); return false;">
+                                Share
+                            </a>
+                            <form action="{{'/delete/'.$poster->id}}" method="POST">
+                                {{ method_field('delete') }}
+                                {{csrf_field ()}}
+                                <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect button-action button-action--delete float-right" type="submit">
+                                    <i class="material-icons">delete</i></button>
+                            </form>
+                            <form action="/edit" method="POST" enctype="multipart/form-data">
+                                {{ csrf_field () }}
+                                <input type="hidden" name="posterId" value="{{$poster->id}}">
+                                <input type="hidden" name="background_id" value="{{$poster->background_id}}">
+                                <input type="hidden" name="quote" value="{{$poster->quote}}">
+                                <input type="hidden" name="author" value="{{$poster->author}}">
+                                <input type="hidden" name="text_background" value="{{$poster->text_background}}">
+                                <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect button-action button-action--edit float-right" href="">
+                                    <i class="material-icons">edit</i>
+                                </button>
+                            </form>
                         </div>
-                        <button type="button" id="{{'modal_btn_'.$poster->id}}" style="display:none;" data-toggle="modal" data-target="#{{'modal_poster_'.$poster->id}}"></button>
-                    </label>
+                        <button class="modal-toggle" type="button" id="{{'modal_btn_'.$poster->id}}" data-toggle="modal" data-target="#{{'modal_poster_'.$poster->id}}"></button>
+                    </div>
+
                     <div class="modal fade" id="{{'modal_poster_'.$poster->id}}" tabindex="-1" role="dialog" aria-hidden="true">
                         <div id="{{'modal_image_'.$poster->id}}" class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content" style="background-image:url('{{asset ('uploads/' . $poster->filename)}}')">
