@@ -91,7 +91,8 @@ div.card.card-main {
 }
 
 div.card.form-poster {
-    border-top: 5px solid #FF5722 ;
+    border-top: 7px solid #FF5722 ;
+    border-bottom: 7px solid #FF5722 ;
 }
 .text__top {
     color: #fff;
@@ -357,7 +358,7 @@ div.modal.fade {
     height: 100vh;
 }
 
-.modal-content {
+.modal-content.modal-poster {
     box-sizing: border-box;
     position: relative;
     border-radius: 7px;
@@ -365,6 +366,17 @@ div.modal.fade {
     background-size: cover !important;
     background-repeat: no-repeat !important;
     background-position: center !important;
+}
+
+.modal-content.modal-delete {
+    height: auto;
+    border-top: 7px solid #FF5722 ;
+    border-bottom: 7px solid #FF5722 ;
+}
+
+.modal-title {
+    text-align: center;
+    font-family: 'Nunito', sans-serif;
 }
 
 button.close {
@@ -394,3 +406,16 @@ button.close:focus {
     color: #3b9388;
 }
 
+.row--bottom-quote{
+    width: 100%;
+    position: absolute;
+    bottom: 15px;
+}
+.col--bottom-quote {
+    border-radius: 10px;
+    /*border-left: 7px solid #FF5722 ;*/
+    /*border-right: 7px solid #FF5722 ;*/
+}
+#bottom_quote {
+    font-family: 'Nunito', sans-serif;
+}

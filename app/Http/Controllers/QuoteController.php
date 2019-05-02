@@ -54,11 +54,13 @@
             // then close it.
             // SEE https://www.php.net/manual/en/function.file-put-contents.php
             file_put_contents ('uploads/'.$filename, $decodedImage);
+            // Query for the background to associate to the poster
+            $background = Background::where('id', '=', $background_id)->first();
 
             $poster->author = $author;
             $poster->quote = $quote;
             $poster->text_background = $text_background;
-            $poster->background_id = $background_id;
+            $poster->background()->associate ($background);
             $poster->filename = $filename;
             // Save new poster
             $poster->save ();
@@ -142,7 +144,11 @@
             $searchTerm = htmlentities ($validateData['searchTerm']);
             $term = '%'.$searchTerm.'%';
             $posters = Poster::where ($filter, 'LIKE', $term)->get ();
-            return view ('pages.quotes.home', ['posters' => $posters]);
+            $state = [
+                'isActive' => 'home',
+                'posters' => $posters,
+            ];
+            return view ('pages.quotes.home', $state);
         }
 
         /**

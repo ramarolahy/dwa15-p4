@@ -47,12 +47,10 @@
                                onClick="MyWindow=window.open('{{"https://www.facebook.com/sharer/sharer.php?u=".URL::asset('uploads/'.$poster->filename)."&display=popup"}}','MyWindow',width='600'); return false;">
                                 Share
                             </a>
-                            <form action="{{'/delete/'.$poster->id}}" method="POST">
-                                {{ method_field('delete') }}
-                                {{csrf_field ()}}
-                                <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect button-action button-action--delete float-right" type="submit">
-                                    <i class="material-icons">delete</i></button>
-                            </form>
+
+                            <!-- Button trigger delete confirmation modal -->
+                            <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect button-action button-action--delete float-right" type="button" data-toggle="modal" data-target="#{{'modal_delete_'.$poster->id}}">
+                                <i class="material-icons">delete</i></button>
                             <form action="/edit" method="POST" enctype="multipart/form-data">
                                 {{ csrf_field () }}
                                 <input type="hidden" name="posterId" value="{{$poster->id}}">
@@ -68,9 +66,32 @@
                         <button class="modal-toggle" type="button" id="{{'modal_btn_'.$poster->id}}" data-toggle="modal" data-target="#{{'modal_poster_'.$poster->id}}"></button>
                     </div>
 
+                    <!-- Modal to confirm delete -->
+                    <div class="modal fade" id="{{'modal_delete_'.$poster->id}}" tabindex="-1" role="dialog"
+                         aria-labelledby="{{'modal_delete_label'.$poster->id}}" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content modal-delete">
+                                <div class="modal-header modal-delete">
+                                    <h5 class="modal-title text-center" id="{{'modal_delete_label'.$poster->id}}">Are you sure you want to delete this poster?</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                    <form action="{{'/delete/'.$poster->id}}" method="POST">
+                                        {{ method_field('delete') }}
+                                        {{csrf_field ()}}
+                                        <div class="modal-footer">
+                                            <button type="button" class="mx-5 mdl-button mdl-js-button mdl-button--raised mdl-button--accent" data-dismiss="modal">Nevermind!</button>
+                                            <button class="text-danger mx-0 mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="submit">Yes delete!</button>
+                                        </div>
+                                    </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Modal to show poster -->
                     <div class="modal fade" id="{{'modal_poster_'.$poster->id}}" tabindex="-1" role="dialog" aria-hidden="true">
                         <div id="{{'modal_image_'.$poster->id}}" class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content" style="background-image:url('{{asset ('uploads/' . $poster->filename)}}')">
+                            <div class="modal-content modal-poster" style="background-image:url('{{asset ('uploads/' . $poster->filename)}}')">
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>

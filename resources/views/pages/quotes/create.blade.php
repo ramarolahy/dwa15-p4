@@ -17,15 +17,6 @@
                             <span class="small">(Leave empty for a random background)</span>
                         </h5>
                     </div>
-                    {{--                            I will keep trying to figure this one out for the final project--}}
-                    {{--                            <div class="card-body">--}}
-                    {{--                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--file">--}}
-                    {{--                                     <input class="mdl-textfield__input" placeholder="Upload image (optional)" type="text" id="uploadFile" readonly/>--}}
-                    {{--                                     <div class="mdl-button mdl-button--primary mdl-button--icon mdl-button--file">--}}
-                    {{--                                         <i class="material-icons">add_photo_alternate</i><input type="file" id="uploadBtn">--}}
-                    {{--                                    </div>--}}
-                    {{--                                </div>--}}
-                    {{--                            </div>--}}
                     <div class="card-body row wrap-card-body__radio">
                         @foreach($backgrounds as $choice)
                             <div class="col-3">
@@ -180,7 +171,14 @@
         </div>
         <!-- END Quote poster-->
     </div>
-    <!-- END App -->
+    <!-- END Quote Maker -->
+    <div class="row row--bottom-quote px-5">
+        <div class=" col--bottom-quote border-1 bg-white col-12">
+            <h6 id="bottom_quote" class="text-center py-0 mx-auto my-2">“Nothing is impossible, the word itself says 'I'm possible'!”<br>
+                <em>- Audrey Hepburn -</em>
+            </h6>
+        </div>
+    </div>
 
 @stop
 
