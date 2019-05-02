@@ -56,11 +56,11 @@
                                 </form>
                                 <form action="/edit" method="POST" enctype="multipart/form-data">
                                     {{ csrf_field () }}
-                                    <input type="hidden" id="posterId" name="posterId" value="{{$poster->id}}">
-                                    <input type="hidden" id="background_id" name="background_id" value="{{$poster->background_id}}">
-                                    <input type="hidden" id="quote" name="quote" value="{{$poster->quote}}">
-                                    <input type="hidden" id="author" name="author" value="{{$poster->author}}">
-                                    <input type="hidden" id="text_background" name="text_background" value="{{$poster->text_background}}">
+                                    <input type="hidden" name="posterId" value="{{$poster->id}}">
+                                    <input type="hidden" name="background_id" value="{{$poster->background_id}}">
+                                    <input type="hidden" name="quote" value="{{$poster->quote}}">
+                                    <input type="hidden" name="author" value="{{$poster->author}}">
+                                    <input type="hidden" name="text_background" value="{{$poster->text_background}}">
                                     <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect button-action button-action--edit float-right" href="">
                                         <i class="material-icons">edit</i>
                                     </button>
