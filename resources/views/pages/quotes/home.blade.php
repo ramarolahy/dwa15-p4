@@ -60,7 +60,7 @@
                                 <input type="hidden" name="quote" value="{{$poster->quote}}">
                                 <input type="hidden" name="author" value="{{$poster->author}}">
                                 <input type="hidden" name="text_background" value="{{$poster->text_background}}">
-                                <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect button-action button-action--edit float-right" href="">
+                                <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect button-action button-action--edit float-right">
                                     <i class="material-icons">edit</i>
                                 </button>
                             </form>
