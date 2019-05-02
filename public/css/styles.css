@@ -19,28 +19,61 @@
 a {
     text-decoration: none !important;
 }
-
+main.container{
+    padding-top: 80px;
+}
+.mdl-layout__header {
+    background-color: transparent;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
 .mdl-layout-title{
+    color: #FF5722;
     position: relative;
-    left: -30px;
-    bottom: -17px;
+    left: -40px;
     font-family: Noteworthy, sans-serif;
     font-weight: bolder;
     font-size: 3em;
-    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.44);
+    text-shadow: 0 0px 2px rgba(0, 0, 0, 0.44);
+
 }
 
 .mdl-layout-title:hover {
-    color: white;
+    bottom: 1px;
+    color: #FF5722;
+    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.44);
 }
 
-.mdl-navigation__link:hover {
-    font-weight: bolder;
-    color: white;
+.navigation {
+    background: transparent;
+    position: relative;
+    bottom: -5px ;
+    color: dimgrey;
+    border-bottom: 3px solid #eaf4ea ;
+}
+
+.navigation.active {
+    color: #1d2124;
+    border-bottom: 3px solid #FF5722 ;
+}
+
+.navigation:hover {
+    background: transparent;
+    border-bottom: 3px solid #FF5722 ;
+}
+
+.row-navigation {
+    margin-left: 20px;
 }
 
 .container {
     min-width: 1200px;
+}
+
+div.card.card-main {
+    position: relative;
+    height: 90vh;
 }
 .text__top {
     color: #fff;
@@ -180,10 +213,32 @@ div.row.d-flex::after {
     flex: auto;
 }
 
+div.row.row-search {
+    position: absolute;
+    width: 100%;
+    z-index: 5;
+    left: 15px;
+    top: 0;
+    border-bottom: 2px solid #c5c5c5;
+}
+
+form#form-reset {
+    position: relative;
+    width: auto;
+}
+
+button#reset-search {
+    position: absolute;
+    right: 10px;
+}
+div.row.row-results {
+    overflow-y: scroll;
+}
+
 /* Quotes image card */
 .demo-card-image.mdl-card {
-    width: 300px;
-    height: 256px;
+    width: 250px;
+    height: auto;
     cursor: pointer;
     color: #fff;
     background-size: cover;
@@ -201,6 +256,23 @@ div.row.d-flex::after {
 .demo-card-image.mdl-card:hover .mdl-button.button-action {
     opacity: 1;
     width: auto;
+}
+
+
+#addButton {
+    position: relative;
+    width: 250px;
+    height: 200px;
+    border-radius: 3px;
+    background-color: white;
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 60%;
+}
+
+#addButton:hover {
+    background-color: #f6f7ff;
 }
 
 a.mdl-button {
@@ -247,21 +319,6 @@ a.mdl-button {
     display: inline-block;
 }
 
-#addButton {
-    position: relative;
-    width: 300px;
-    height: 256px;
-    border-radius: 3px;
-    background-color: white;
-    cursor: pointer;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 60%;
-}
-
-#addButton:hover {
-    background-color: #f6f7ff;
-}
 
 div.modal.fade {
     background-color: rgba(0, 0, 0, 0.81) !important;

@@ -34,12 +34,13 @@
             }
             $author = \request ('author');
             $quote = \request ('quote');
-            $text_background = \request ('text_background');
+            $text_background = \request ('text_background') || 0;
             $background_id = \request ('background_id');
+            // Construct filename
             $filename = $this->setFilename ($author, $quote,
                                             $text_background,
                                             $background_id);
-
+            // Store base64 image file
             $imageBase64 = \request ('file');
 
             // Extract the image base64 data by exploding the file (This
@@ -59,11 +60,10 @@
             $poster->text_background = $text_background;
             $poster->background_id = $background_id;
             $poster->filename = $filename;
-
+            // Save new poster
             $poster->save ();
 
             return redirect ()->route ('quotes.home');
-
         }
 
         /***** READ *****
@@ -119,15 +119,20 @@
                 $poster = null;
             }
             $state = [
-                'posters' => $this->listPosters (),
-                'poster'  => $poster,
+                'posters'  => $this->listPosters (),
+                'poster'   => $poster,
+                'isActive' => 'home',
             ];
 
             //dump($posters);
             return view ('pages.quotes.home', $state);
         }
 
-
+        /**
+         * Method to search for poster by author or keyword in quotes.
+         * @param Request $request
+         * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+         */
         public function search (Request $request) {
             $validateData = $request->validate ([
                                                     'filter'     => 'required',
@@ -146,6 +151,7 @@
          */
         public function create () {
             $state = [
+                'isActive'      => 'create',
                 'posterId'      => null,
                 'textBg'        => 'quote-text__bg',
                 'imgBg'         => null,
@@ -173,16 +179,19 @@
                                                     'myBackground' => 'file|image|mimes:jpeg,jpg,png,gif|max:2048'
                                                 ]);
             $selectedBg = \request ('selectedBg');
-
+            // Get collection of bg images in storage
             $bgImages = $this->listBackgrounds ();
-            $bgImageCount = $bgImages->count ();
             if ($selectedBg) {
                 $imgBg = asset ('/images/'.$selectedBg);
                 $imgBg_id = Background::where ('filename', '=', $selectedBg)
                     ->first ()->id;
             }
             else {
+                // Get bg count to use with rand()
+                $bgImageCount = $bgImages->count ();
+                // Generate random bg id
                 $randId = rand (1, $bgImageCount);
+                // Get bg from db
                 $randBackground = Background::where ('id', '=', $randId)->first ();
                 $randFile = $randBackground->filename;
                 $imgBg_id = $randBackground->id;
@@ -191,10 +200,11 @@
             $posterId = \request ('posterId');
             $quote = htmlentities ($validateData['quote']);
             $author = htmlentities ($validateData['author']);
-            $addTxtBg = \request ('addTxtBg');
+            $addTxtBg = \request ('addTxtBg') || 0;
             $textBg = 'quote-text__bg';
 
             $state = [
+                'isActive'    => 'create',
                 'posterId'    => $posterId,
                 'textBg'      => $textBg,
                 'imgBg'       => $imgBg,
@@ -219,6 +229,7 @@
                 ->first ();
             $textBg = 'quote-text__bg';
             $state = [
+                'isActive'    => 'create',
                 'posterId'    => $request['posterId'],
                 'textBg'      => $textBg,
                 'imgBg'       => asset ('/images/'.$imgBg->filename),
@@ -241,7 +252,8 @@
          * @param int $bgID
          * @return string: authorname_firstthreewords_[int][int].png
          */
-        public function setFilename (string $author, string $quote, int $textBg, int $bgID) {
+        public function setFilename (string $author, string $quote, int $bgID,
+            int $textBg = 0) {
             // Remove non a-zA-Z spaces in author and quotes (first three words)
             // and change to lowercase
             $pattern = '/([^a-zA-Z]|\s)/i';
@@ -255,6 +267,5 @@
             // return file name as authorname_firstthreewords_[int][int].png
             return $authorToLower.'_'.$quoteToLower.'_'.$textBg.$bgID.'.png';
         }
-
 
     }

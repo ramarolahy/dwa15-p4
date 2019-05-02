@@ -3,49 +3,49 @@
 @section('title', 'Quotes')
 
 @section('content')
-    <div class="card pt-5 pb-0 px-5 border-0 bg-light">
-        {{-- Add overlay here --}}
-        <div class="row px-4">
-            <form id="form-search" class="col-10 form-inline" method="POST" action="/search">
-                {{ csrf_field () }}
-                <div class="float-right form-group">
-                    <span class="mdl-radio__label mr-4">Filter by: </span>
-                    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect mx-2" for="author">
-                        <input type="radio" id="author" class="mdl-radio__button" name="filter" value="author" checked>
-                        <span class="mdl-radio__label">Author</span>
-                    </label>
-                    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect mx-2" for="topic">
-                        <input type="radio" id="topic" class="mdl-radio__button" name="filter" value="quote">
-                        <span class="mdl-radio__label">Keyword</span>
-                    </label>
+
+    {{-- Fixed search row --}}
+    <div class="row row-search px-4 bg-light">
+        <form id="form-search" class="col-8 form-inline" method="POST" action="/search">
+            {{ csrf_field () }}
+            <div class="float-right form-group">
+                <span class="mdl-radio__label mr-4">Filter by: </span>
+                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect mx-2" for="author">
+                    <input type="radio" id="author" class="mdl-radio__button" name="filter" value="author" checked>
+                    <span class="mdl-radio__label">Author</span>
+                </label>
+                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect mx-2" for="topic">
+                    <input type="radio" id="topic" class="mdl-radio__button" name="filter" value="quote">
+                    <span class="mdl-radio__label">Keyword</span>
+                </label>
+            </div>
+            <div class="form-group mx-auto w-auto">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mx-2">
+                    <i class="fas fa-search"></i>
+                    <input class="mdl-textfield__input pl-5 " type="text" id="search" name="searchTerm" placeholder="Search for a poster..." required>
                 </div>
-                <div class="form-group mx-auto w-auto">
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mx-2">
-                        <i class="fas fa-search"></i>
-                        <input class="mdl-textfield__input pl-5 " type="text" id="search" name="searchTerm" placeholder="Search for a poster..." required>
-                    </div>
-                </div>
-                <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" type="submit">
-                    Search
-                </button>
-            </form>
-            <form id="form-reset" class="col-2 form-inline px-0" action="/">
-                <button class="ml-5 mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="submit">
-                    Reset
-                </button>
-            </form>
-        </div>
+            </div>
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" type="submit">
+                Search
+            </button>
+        </form>
+        <div class="col-2"></div>
+        <form id="form-reset" class="col-2 form-inline px-0" action="/">
+            <button id="reset-search" class="mx-0 mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="submit">
+                Reset
+            </button>
+        </form>
     </div>
-    <div class="card container-list--posters pt-0 pb-5 px-5 border-0 bg-light">
-        <div class="centered mx-auto px-5">
+    <div class="row row-results container-list--posters mt-5 pt-0 pb-5 ml-2 border-0 bg-light">
+        <div class="centered mx-auto pt-3">
             <div class="row d-flex justify-content-start">
                 @foreach ($posters as $poster)
                     <label for="{{'modal_btn_'.$poster->id}}">
-                        <div class="mx-4 my-3 demo-card-image mdl-card mdl-shadow--2dp "
+                        <div class=" mx-3 my-3 demo-card-image mdl-card mdl-shadow--2dp "
                              style="background-image:url('{{asset ('uploads/' . $poster->filename)}}')">
                             <div class="mdl-card__actions clearfix">
                                 <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect button-action button-action--share float-left" href='#'
-                                   onClick="MyWindow=window.open('{{"https://www.facebook.com/sharer/sharer.php?u=".URL::asset('uploads/'.$poster->filename)."&display=popup"}}','facebook',width='600'); return false;">
+                                   onClick="MyWindow=window.open('{{"https://www.facebook.com/sharer/sharer.php?u=".URL::asset('uploads/'.$poster->filename)."&display=popup"}}','MyWindow',width='600'); return false;">
                                     Share
                                 </a>
                                 <form action="{{'/delete/'.$poster->id}}" method="POST">
@@ -61,7 +61,8 @@
                                     <input type="hidden" id="quote" name="quote" value="{{$poster->quote}}">
                                     <input type="hidden" id="author" name="author" value="{{$poster->author}}">
                                     <input type="hidden" id="text_background" name="text_background" value="{{$poster->text_background}}">
-                                    <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect button-action button-action--edit float-right" href=""><i class="material-icons">edit</i>
+                                    <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect button-action button-action--edit float-right" href="">
+                                        <i class="material-icons">edit</i>
                                     </button>
                                 </form>
                             </div>
@@ -70,25 +71,25 @@
                     </label>
                     <div class="modal fade" id="{{'modal_poster_'.$poster->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         <div id="{{'modal_image_'.$poster->id}}" class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content" style="background-image:url('{{asset ('uploads/' . $poster->filename)}}')" >
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                            <div class="modal-body">
-                            </div>
+                            <div class="modal-content" style="background-image:url('{{asset ('uploads/' . $poster->filename)}}')">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <div class="modal-body">
+                                </div>
                             </div>
                         </div>
                     </div>
                 @endforeach
                 <a href="/create">
-                    <div class="mx-4 my-3 mdl-shadow--2dp" id="addButton" style="background-image:url('{{asset ('images/plus-square.svg')}}')">
+                    <div class="mx-3 my-3 mdl-shadow--2dp" id="addButton" style="background-image:url('{{asset ('images/plus-square.svg')}}')">
                     </div>
                 </a>
-
             </div>
-
         </div>
     </div>
+
+
 
 
 

@@ -49,8 +49,6 @@
 + There's a many-to-many relationship between `movies` and `categories`
 + There's a one-to-many relationship between `movies` and `users`
 
-## Outside resources
-*Your list of outside resources go here*
 
 ## Code style divergences
 *List any divergences from PSR-1/PSR-2 and course guidelines on code style*

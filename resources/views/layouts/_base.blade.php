@@ -5,15 +5,12 @@
     <title>Pretty Quotes - @yield('title')</title>
 </head>
 <body>
-<header class="mdl-layout__fixed-header">
-    @include('includes._navbar')
-</header>
-
-<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-    <main class="container pt-5">
-        @yield('content')
-    </main>
-</div>
+@include('includes._navbar')
+<main class="container">
+    <div class="card card-main py-3 px-5 border-0 bg-light mdl-shadow--2dp">
+    @yield('content')
+    </div>
+</main>
 
 @yield ('script')
 
