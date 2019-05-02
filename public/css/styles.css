@@ -15,6 +15,9 @@
     background: #3b9388;
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
 }
+body {
+    background: #1e4865;
+}
 
 a {
     text-decoration: none !important;
@@ -27,6 +30,10 @@ main.container{
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
+}
+
+.mdl-layout__header-row {
+    position: relative;
 }
 .mdl-layout-title{
     color: #FF5722;
@@ -49,22 +56,29 @@ main.container{
     background: transparent;
     position: relative;
     bottom: -5px ;
-    color: dimgrey;
-    border-bottom: 3px solid #eaf4ea ;
+    color: #e9e9e9;
+    font-weight: lighter;
 }
 
 .navigation.active {
-    color: #1d2124;
+    color: white;
+    font-weight: bold;
     border-bottom: 3px solid #FF5722 ;
 }
 
 .navigation:hover {
+    color: white;
     background: transparent;
     border-bottom: 3px solid #FF5722 ;
 }
 
 .row-navigation {
     margin-left: 20px;
+}
+
+.row-navigation__auth {
+    position: absolute;
+    right: 0;
 }
 
 .container {
@@ -74,6 +88,10 @@ main.container{
 div.card.card-main {
     position: relative;
     height: 90vh;
+}
+
+div.card.form-poster {
+    border-top: 5px solid #FF5722 ;
 }
 .text__top {
     color: #fff;

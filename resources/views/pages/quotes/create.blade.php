@@ -10,7 +10,7 @@
             <form method="POST" action="/new" enctype="multipart/form-data">
                 {{ csrf_field () }}
                 <input type="hidden" name="posterId" value="{{$posterId}}">
-                <div class="card border-0 px-4 pb-2">
+                <div class="card form-poster px-4 pb-2">
                     <!-- Background selection -->
                     <div class="card-body">
                         <h5 class="mdl-card__title-text">Choose Background<br>
