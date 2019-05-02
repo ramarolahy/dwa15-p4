@@ -10,13 +10,13 @@
             {{ csrf_field () }}
             <div class="float-right form-group">
                 <span class="mdl-radio__label mr-4">Filter by: </span>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect mx-2" for="author">
-                    <input type="radio" id="author" class="mdl-radio__button" name="filter" value="author" checked>
-                    <span class="mdl-radio__label">Author</span>
-                </label>
                 <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect mx-2" for="topic">
-                    <input type="radio" id="topic" class="mdl-radio__button" name="filter" value="quote">
+                    <input type="radio" id="topic" class="mdl-radio__button" name="filter" value="quote" checked>
                     <span class="mdl-radio__label">Keyword</span>
+                </label>
+                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect mx-2" for="author">
+                    <input type="radio" id="author" class="mdl-radio__button" name="filter" value="author">
+                    <span class="mdl-radio__label">Author</span>
                 </label>
             </div>
             <div class="form-group mx-auto w-auto">
