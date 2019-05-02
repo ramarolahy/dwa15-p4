@@ -69,7 +69,7 @@
                         </div>
                         <button type="button" id="{{'modal_btn_'.$poster->id}}" style="display:none;" data-toggle="modal" data-target="#{{'modal_poster_'.$poster->id}}"></button>
                     </label>
-                    <div class="modal fade" id="{{'modal_poster_'.$poster->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal fade" id="{{'modal_poster_'.$poster->id}}" tabindex="-1" role="dialog" aria-hidden="true">
                         <div id="{{'modal_image_'.$poster->id}}" class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content" style="background-image:url('{{asset ('uploads/' . $poster->filename)}}')">
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
