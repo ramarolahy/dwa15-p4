@@ -71,7 +71,7 @@
                          aria-labelledby="{{'modal_delete_label'.$poster->id}}" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content modal-delete">
-                                <div class="modal-header modal-delete">
+                                <div class="modal-header modal-delete border-0">
                                     <h5 class="modal-title text-center" id="{{'modal_delete_label'.$poster->id}}">Are you sure you want to delete this poster?</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
@@ -89,9 +89,11 @@
                         </div>
                     </div>
                     <!-- Modal to show poster -->
+
                     <div class="modal fade" id="{{'modal_poster_'.$poster->id}}" tabindex="-1" role="dialog" aria-hidden="true">
                         <div id="{{'modal_image_'.$poster->id}}" class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content modal-poster" style="background-image:url('{{asset ('uploads/' . $poster->filename)}}')">
+                            <div class="modal-content modal-poster">
+                                <img class="modal-image--poster" src="{{asset ('uploads/' . $poster->filename)}}" alt="{{$poster->filename}}">
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>

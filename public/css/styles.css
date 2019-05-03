@@ -368,10 +368,15 @@ div.modal.fade {
     background-position: center !important;
 }
 
+.modal-image--poster{
+    border-radius: inherit;
+    width: inherit;
+    height: inherit;
+}
+
 .modal-content.modal-delete {
     height: auto;
     border-top: 7px solid #FF5722 ;
-    border-bottom: 7px solid #FF5722 ;
 }
 
 .modal-title {
