@@ -43,8 +43,8 @@
                     <div class=" mx-3 my-3 demo-card-image mdl-card mdl-shadow--2dp "
                          style="background-image:url('{{asset ('uploads/' . $poster->filename)}}')">
                         <div class="mdl-card__actions clearfix">
-                            <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect button-action button-action--share float-left" href='#'
-                               onClick="MyWindow=window.open('{{"https://www.facebook.com/sharer/sharer.php?u=".URL::asset('uploads/'.$poster->filename)."&display=popup"}}','MyWindow',width='600'); return false;">
+                            <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect button-action button-action--share float-left"
+                                href="javascript:fbShare('{{URL::asset('uploads/')}}', 'Fb Share', 'Facebook share popup', '{{$poster->filename}}', 600, 350)">
                                 Share
                             </a>
 
@@ -111,4 +111,13 @@
         </div>
     </div>
 
+@stop
+@section('script')
+    <script>
+        function fbShare(url, title, descr, image, winWidth, winHeight) {
+            var winTop = (screen.height / 2) - (winHeight / 2);
+            var winLeft = (screen.width / 2) - (winWidth / 2);
+            window.open('http://www.facebook.com/sharer.php?s=100&p[title]=' + title + '&p[summary]=' + descr + '&p[url]=' + url + '&p[images][0]=' + image, 'sharer', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width=' + winWidth + ',height=' + winHeight);
+        }
+    </script>
 @stop

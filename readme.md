@@ -12,6 +12,7 @@
 + https://www.iconfinder.com/search/?q=plus&price=free
 + https://laracasts.com/discuss/channels/general-discussion/facebook-share?page=0
 + https://stackoverflow.com/ : Many random tips
++ https://stackoverflow.com/questions/14829040/facebook-sharer-popup-window : Facebook popup
 
 ## Packages
 + barryvdh/laravel-debugbar
