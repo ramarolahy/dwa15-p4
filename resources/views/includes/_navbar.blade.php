@@ -1,17 +1,30 @@
-<div class="mdl-layout mdl-js-layout container">
-    <header class="mdl-layout__header mdl-layout__header--scroll">
-        <div class="mdl-layout__header-row">
-            <a href="{{ route('quotes.home') }}"><span class="mdl-layout-title">Pretty quotes</span></a>
-            <div class="row-navigation row-navigation__pages">
-                <a class="mdl-button navigation navigation-quotes mx-2 {{$isActive === 'home' ? 'active' : null}} " href="{{ route('quotes.home') }}">Quotes</a>
-                <a class="mdl-button navigation navigation-create mx-2 {{$isActive === 'create' ? 'active' : null}}" href="{{ route('quotes.create') }}">Poster Maker</a>
+<div class="navbar-prettyquotes mdl-layout mdl-js-layout">
+    <div class="container">
+        <header class="mdl-layout__header">
+            <div class="mdl-layout__header-row">
+                <a href="{{ route('home') }}"><span class="mdl-layout-title">Pretty quotes <span class="title-for">for {{ $user ? $user->first_name : 'you' }}</span> </span></a>
+                <div class="row-navigation row-navigation__pages">
+                    <a class="mdl-button navigation navigation-quotes mx-2 {{\Request::is('/') ? 'active' : null}} " href="{{ route('home') }}">Quotes</a>
+                    @if(Auth::check ())
+                        <a class="mdl-button navigation navigation-create mx-2 {{\Request::is('create') ? 'active' : null}}" href="{{ route('create') }}">
+                            Poster Maker
+                        </a>
+                    @endif
+                </div>
+                <div class="row-navigation row-navigation__auth">
+                    @guest
+                        <a class="mdl-button navigation navigation-login mx-2 {{\Request::is('login') ? 'active' : null}} " href="{{ route('login') }}">Login</a>
+                        <a class="mdl-button navigation navigation-signup mx-2 {{\Request::is('register') ? 'active' : null}}" href="{{ route('register') }}">Register</a>
+                    @else
+                        <a class="mdl-button navigation navigation-logout mx-2"
+                           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                    @endguest
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                </div>
             </div>
-{{--            <div class="row-navigation row-navigation__auth">--}}
-{{--                <a class="mdl-button navigation navigation-login mx-2 {{$isActive === 'login' ? 'active' : null}} " href="">Login</a>--}}
-{{--                <a class="mdl-button navigation navigation-signup mx-2 {{$isActive === 'signup' ? 'active' : null}}" href="">Signup</a>--}}
-{{--                <a class="mdl-button navigation navigation-logout mx-2 {{$isActive === 'logout' ? 'active' : null}}" href="">Logout</a>--}}
-{{--            </div>--}}
-        </div>
-    </header>
+        </header>
+    </div>
 </div>
 

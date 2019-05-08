@@ -2,9 +2,11 @@
 
     namespace App\Http\Controllers;
 
+    use Illuminate\Support\Facades\Auth;
     use Illuminate\Http\Request;
     use Illuminate\Support\Facades\File;
     use Intervention\Image\ImageManager;
+    use App\User;
     use App\Poster;
     use App\Background;
 
@@ -55,17 +57,20 @@
             // SEE https://www.php.net/manual/en/function.file-put-contents.php
             file_put_contents ('uploads/'.$filename, $decodedImage);
             // Query for the background to associate to the poster
-            $background = Background::where('id', '=', $background_id)->first();
+            $background = Background::where ('id', '=', $background_id)->first ();
+            $user_id = Auth::id ();
+            $user = User::where ('id', '=', $user_id)->first ();
 
             $poster->author = $author;
             $poster->quote = $quote;
             $poster->text_background = $text_background;
-            $poster->background()->associate ($background);
+            $poster->background ()->associate ($background);
+            $poster->user ()->associate ($user);
             $poster->filename = $filename;
             // Save new poster
             $poster->save ();
 
-            return redirect ()->route ('quotes.home');
+            return redirect ()->route ('home');
         }
 
         /***** READ *****
@@ -104,51 +109,8 @@
                     File::delete ($imagePath);
                 }
                 // Reload page
-                return redirect ()->route ('quotes.home');
+                return redirect ()->route ('home');
             }
-        }
-
-        /**
-         * Method to GET the quotes route and display all posters from the db
-         * @param int $posterId
-         * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-         */
-        public function home (int $posterId = null) {
-            if ($posterId) {
-                $poster = Poster::where ('id', '=', $posterId)->first ();
-            }
-            else {
-                $poster = null;
-            }
-            $state = [
-                'posters'  => $this->listPosters (),
-                'poster'   => $poster,
-                'isActive' => 'home',
-            ];
-
-            //dump($posters);
-            return view ('pages.quotes.home', $state);
-        }
-
-        /**
-         * Method to search for poster by author or keyword in quotes.
-         * @param Request $request
-         * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-         */
-        public function search (Request $request) {
-            $validateData = $request->validate ([
-                                                    'filter'     => 'required',
-                                                    'searchTerm' => 'required',
-                                                ]);
-            $filter = $validateData['filter'];
-            $searchTerm = htmlentities ($validateData['searchTerm']);
-            $term = '%'.$searchTerm.'%';
-            $posters = Poster::where ($filter, 'LIKE', $term)->get ();
-            $state = [
-                'isActive' => 'home',
-                'posters' => $posters,
-            ];
-            return view ('pages.quotes.home', $state);
         }
 
         /**
@@ -157,7 +119,6 @@
          */
         public function create () {
             $state = [
-                'isActive'      => 'create',
                 'posterId'      => null,
                 'textBg'        => 'quote-text__bg',
                 'imgBg'         => null,
@@ -174,6 +135,7 @@
         /**
          * Method to validate user inputs, and display created poster to
          * canvas upon validation.
+         * DOES NOT SAVE NEW POSTER TO DATABASE
          * @param Request $request
          * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
          */
@@ -210,7 +172,6 @@
             $textBg = 'quote-text__bg';
 
             $state = [
-                'isActive'    => 'create',
                 'posterId'    => $posterId,
                 'textBg'      => $textBg,
                 'imgBg'       => $imgBg,
@@ -235,7 +196,6 @@
                 ->first ();
             $textBg = 'quote-text__bg';
             $state = [
-                'isActive'    => 'create',
                 'posterId'    => $request['posterId'],
                 'textBg'      => $textBg,
                 'imgBg'       => asset ('/images/'.$imgBg->filename),

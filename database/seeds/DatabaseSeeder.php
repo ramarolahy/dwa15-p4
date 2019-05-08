@@ -11,7 +11,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+        // Seed tables in order according to foreign key relationship
+        $this->call(UsersTableSeeder::class);
         $this->call(BackgroundsTableSeeder::class);
         $this->call(PostersTableSeeder::class);
     }
