@@ -48,6 +48,6 @@ class HomeController extends Controller
         $state = [
             'posters' => $posters,
         ];
-        return view ('pages.quotes.home', $state);
+        return view ('pages.home', $state);
     }
 }
