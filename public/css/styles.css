@@ -64,11 +64,11 @@ div.navbar-prettyquotes {
 
 .title-for {
     font-family: "Brush Script MT", serif;
-    font-size: 1em;
+    font-size: 0.7em;
     position: absolute;
     color: white;
-    left: 50%;
-    bottom: -25px;
+    left: 40%;
+    bottom: -17px;
     z-index: 0;
 }
 .mdl-layout-title:hover {
