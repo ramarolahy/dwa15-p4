@@ -8,11 +8,11 @@
 @include('includes._navbar')
 <main class="container">
     @if (\Request::is('login') or \Request::is('register') or \Request::is('password/*'))
-        <div class="card card-main--auth py-3 px-5 border-0 bg-light mdl-shadow--2dp">
+        <div class="card card-main--auth py-3 px-3 border-0 bg-light mdl-shadow--2dp">
             @yield('content')
         </div>
     @else
-        <div class="card card-main py-3 px-5 border-0 bg-light mdl-shadow--2dp">
+        <div class="card card-main py-3 px-3 border-0 bg-light mdl-shadow--2dp">
             @yield('content')
         </div>
     @endif

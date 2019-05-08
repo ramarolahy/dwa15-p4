@@ -114,11 +114,13 @@ div.navbar-prettyquotes {
 }
 
 div.card.card-main {
+    width: 1180px;
     position: relative;
     height: 90vh;
 }
 
 div.card.card-main--auth {
+    width: 1180px;
     background-color: rgba(27, 30, 33, 0.11) !important;
     position: relative;
     height: 90vh;

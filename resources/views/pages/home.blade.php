@@ -40,18 +40,18 @@
             </button>
         </form>
     </div>
-    <div class="row row-results container-list--posters mt-5 pt-0 pb-5 ml-2 border-0 bg-light">
+    <div class="row row-results bg-transparent container-list--posters w-100 mx-0 mt-5 pt-0 pb-5 px-0 border-0 bg-light">
         {{----}}
         @guest
             <div class="card message-invite my-3 py-3 text-center">
-                <p class="mx-0 px-0 my-0 py-0">Please <b>login</b> or <b>register</b> if you would like to create your
-                                               own poster! :)</p>
+                <p class="mx-0 px-0 my-0 py-0">
+                    Please <b>login</b> or <b>register</b> if you would like to create your own poster! :)</p>
             </div>
         @endguest
-        <div class="centered mx-auto pt-3">
+        <div class="centered w-100 mx-auto pt-3 pl-5 pr-4">
             @if (Auth::check())
                 <div class="poster-row--divider px-4 my-3 text-center">Your Posters</div>
-                <div class="row d-flex justify-content-start">
+                <div class="row d-flex justify-content-around">
                     @foreach ($posters as $poster)
                         @if ($user and $poster->user_id === $user->id)
                             <div class=" mx-3 my-3 demo-card-image mdl-card mdl-shadow--2dp "
@@ -131,7 +131,7 @@
                 </div>
                 <div class="poster-row--divider px-4 my-3 text-center">Posters made by others</div>
             @endif
-            <div class="row d-flex justify-content-start">
+            <div class="row d-flex justify-content-around">
                 @foreach ($posters as $poster)
                     @guest
                         <div class=" mx-3 my-3 demo-card-image mdl-card mdl-shadow--2dp "
