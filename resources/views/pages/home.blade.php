@@ -54,7 +54,7 @@
                 <div class="row d-flex justify-content-start">
                     @foreach ($posters as $poster)
                         @if ($user and $poster->user_id === $user->id)
-                            <div class=" mx-3 my-2 demo-card-image mdl-card mdl-shadow--2dp "
+                            <div class=" mx-3 my-3 demo-card-image mdl-card mdl-shadow--2dp "
                                  style="background-image:url('{{asset ('uploads/' . $poster->filename)}}')">
                                 <div class="mdl-card__actions clearfix">
                                     <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect button-action button-action--share float-left"
@@ -134,7 +134,7 @@
             <div class="row d-flex justify-content-start">
                 @foreach ($posters as $poster)
                     @guest
-                        <div class=" mx-3 my-2 demo-card-image mdl-card mdl-shadow--2dp "
+                        <div class=" mx-3 my-3 demo-card-image mdl-card mdl-shadow--2dp "
                              style="background-image:url('{{asset ('uploads/' . $poster->filename)}}')">
                             <div class="mdl-card__actions clearfix">
                                 <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect button-action button-action--share float-left"
@@ -187,7 +187,7 @@
                         </div>
                     @else
                         @if($user and $poster->user_id != $user->id)
-                            <div class=" mx-3 my-2 demo-card-image mdl-card mdl-shadow--2dp "
+                            <div class=" mx-3 my-3 demo-card-image mdl-card mdl-shadow--2dp "
                                  style="background-image:url('{{asset ('uploads/' . $poster->filename)}}')">
                                 <div class="mdl-card__actions clearfix">
                                     <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect button-action button-action--share float-left"

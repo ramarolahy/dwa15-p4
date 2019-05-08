@@ -13,7 +13,7 @@
                 <div class="card form-poster px-4 pb-2">
                     <!-- Background selection -->
                     <div class="card-body">
-                        <h5 class="mdl-card__title-text">*Choose Background<br>
+                        <h5 class="mdl-card__title-text">*Choose your background<br>
 {{--                            <span class="small">(Leave empty for a random background)</span>--}}
                         </h5>
                     </div>
@@ -153,7 +153,7 @@
                         <span class="text__top">~~~</span>
                     </div>
                 @else
-                    <div class="py-5 @if ( isset( $addTxtBg ) and $addTxtBg ) {{ $textBg }} @endif quote-text text-center ">
+                    <div class="py-5 px-4 @if ( isset( $addTxtBg ) and $addTxtBg ) {{ $textBg }} @endif quote-text text-center ">
                         <!--If there are no errors, print quote and
                         author-->
                         <span class="my-5 text__top">"{{ $quote }}"</span>

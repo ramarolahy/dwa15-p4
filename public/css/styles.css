@@ -155,7 +155,7 @@ div.card.form-auth {
 .text__top {
     color: #fff;
     line-height: 1.3;
-    font-size: 28px;
+    font-size: 1.5em;
 }
 
 a {
@@ -172,8 +172,13 @@ a {
 
 .quote-text {
     position: absolute;
-    bottom: 0;
-    width: 100%;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+    border-radius: 5px;
+    bottom: 1%;
+    left: 1%;
+    width: 98%;
+    height: auto;
 }
 
 .default_quote {
@@ -190,6 +195,7 @@ a {
 
 
 .wrap-quote {
+    position: relative;
     width: 608px;
     height: 500px;
     background-repeat: no-repeat;
@@ -576,7 +582,7 @@ button.close:focus {
 .carousel-item-next.carousel-item-left + .carousel-item + .carousel-item + .carousel-item + .carousel-item {
     position: relative;
     transform: translate3d(-100%, 0, 0);
-    transition: all 500ms;
+    transition: all 300ms;
     visibility: visible;
 }
 
@@ -598,21 +604,21 @@ button.close:focus {
 .carousel-item-prev.carousel-item-right + .carousel-item + .carousel-item + .carousel-item + .carousel-item {
     position: relative;
     transform: translate3d(100%, 0, 0);
-    transition: all 500ms;
+    transition: all 300ms;
     visibility: visible;
     display: block;
 }
 
 span.carousel-control-next-icon, span.carousel-control-prev-icon {
-    width: 20px;
+    width: 10px;
 }
 
 a[role="button"] {
     background-color: #1e4865;
     top: 50%;
     transform: translateY(-60%);
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
 }
 
