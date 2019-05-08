@@ -8,6 +8,7 @@
     Route::get ('/', 'HomeController@home')->name ('home');
     Route::post ('/search', 'HomeController@search')->name ('search');
     // Only logged in users can Create, Update, and Delete Posters
+
     Route::group(['middleware' => 'auth'], function () {
         // CREATE
         Route::get ('/create', 'QuoteController@create')->name ('create');

@@ -44,7 +44,6 @@
                                             $background_id);
             // Store base64 image file
             $imageBase64 = \request ('file');
-
             // Extract the image base64 data by exploding the file (This
             // looks like JS destructuring!!)
             // There is only one ; and one , in the encoded file so we can do
@@ -150,7 +149,7 @@
             // Get collection of bg images in storage
             $bgImages = $this->listBackgrounds ();
             if ($selectedBg) {
-                $imgBg = asset ('/images/'.$selectedBg);
+                $imgBg = asset ('/images/backgrounds/'.$selectedBg);
                 $imgBg_id = Background::where ('filename', '=', $selectedBg)
                     ->first ()->id;
             }
@@ -198,7 +197,7 @@
             $state = [
                 'posterId'    => $request['posterId'],
                 'textBg'      => $textBg,
-                'imgBg'       => asset ('/images/'.$imgBg->filename),
+                'imgBg'       => asset ('/images/backgrounds/'.$imgBg->filename),
                 'imgBg_id'    => $request['background_id'],
                 'selectedBg'  => $imgBg->filename,
                 'quote'       => $request['quote'],

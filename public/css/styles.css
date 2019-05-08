@@ -13,8 +13,9 @@
 *::-webkit-scrollbar-thumb {
     border-radius: 10px;
     background: #3b9388;
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
 }
+
 body {
     /*background: rgb(11,33,47);*/
     /*background: linear-gradient(180deg, rgba(11,33,47,1) 0%, rgba(23,81,120,1) 100%);*/
@@ -50,7 +51,8 @@ div.navbar-prettyquotes {
 .mdl-layout__header-row {
     position: relative;
 }
-.mdl-layout-title{
+
+.mdl-layout-title {
     color: #FF5722;
     position: relative;
     left: -40px;
@@ -64,13 +66,14 @@ div.navbar-prettyquotes {
 
 .title-for {
     font-family: "Brush Script MT", serif;
-    font-size: 0.7em;
+    font-size: 0.8em;
     position: absolute;
     color: white;
-    left: 40%;
+    left: 55%;
     bottom: -17px;
     z-index: 0;
 }
+
 .mdl-layout-title:hover {
     bottom: 1px;
     color: #FF5722;
@@ -80,7 +83,7 @@ div.navbar-prettyquotes {
 .navigation {
     background: transparent;
     position: relative;
-    bottom: -5px ;
+    bottom: -5px;
     color: #e9e9e9;
     font-weight: lighter;
 }
@@ -88,13 +91,13 @@ div.navbar-prettyquotes {
 .navigation.active {
     color: white;
     font-weight: bold;
-    border-bottom: 3px solid #FF5722 ;
+    border-bottom: 3px solid #FF5722;
 }
 
 .navigation:hover {
     color: white;
     background: transparent;
-    border-bottom: 3px solid #FF5722 ;
+    border-bottom: 3px solid #FF5722;
 }
 
 .row-navigation {
@@ -114,6 +117,7 @@ div.card.card-main {
     position: relative;
     height: 90vh;
 }
+
 div.card.card-main--auth {
     background-color: rgba(27, 30, 33, 0.11) !important;
     position: relative;
@@ -139,8 +143,8 @@ div.card-header.card-header__auth {
 }
 
 div.card.form-poster, div.card.form-auth {
-    border-top: 7px solid #FF5722 ;
-    border-bottom: 7px solid #FF5722 ;
+    border-top: 7px solid #FF5722;
+    border-bottom: 7px solid #FF5722;
 }
 
 div.card.form-auth {
@@ -163,7 +167,7 @@ a {
 }
 
 .quote-text__bg {
-    background-color: rgba(0,0,0,0.50);
+    background-color: rgba(0, 0, 0, 0.50);
 }
 
 .quote-text {
@@ -173,6 +177,8 @@ a {
 }
 
 .default_quote {
+    position: relative;
+    bottom: -50px;
     text-align: center;
     height: 500px;
     padding-top: 200px;
@@ -184,8 +190,8 @@ a {
 
 
 .wrap-quote {
-    width:608px;
-    height:500px;
+    width: 608px;
+    height: 500px;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -203,10 +209,11 @@ a {
 .col-7 {
     position: relative;
 }
+
 #quoteImg {
     position: absolute;
     z-index: 2;
-    top:0;
+    top: 0;
 }
 
 [type=radio] {
@@ -230,9 +237,11 @@ a {
 .alert-info {
     width: 608px;
 }
-div.mdl-button.mdl-button--primary.mdl-button--icon.mdl-button--file{
+
+div.mdl-button.mdl-button--primary.mdl-button--icon.mdl-button--file {
     right: 0px;
 }
+
 .mdl-button--file input {
     cursor: pointer;
     height: 100%;
@@ -243,14 +252,17 @@ div.mdl-button.mdl-button--primary.mdl-button--icon.mdl-button--file{
     width: 100%;
     z-index: 4;
 }
+
 span.small {
     color: darkseagreen;
     font-size: 0.5em;
 }
+
 .mdl-textfield--file.mdl-textfield__input {
     box-sizing: border-box;
     width: 100%;
 }
+
 .mdl-textfield--file.mdl-button--file {
     position: absolute;
     right: 0;
@@ -304,6 +316,7 @@ button#reset-search {
     position: absolute;
     right: 10px;
 }
+
 div.row.row-results {
     overflow-y: scroll;
 }
@@ -320,7 +333,7 @@ div.row.row-results {
 }
 
 .poster-row--divider:after {
-    content:"";
+    content: "";
     position: absolute;
     width: 885px;
     bottom: 25%;
@@ -363,7 +376,7 @@ div.row.row-results {
     cursor: pointer;
 }
 
-.modal-toggle:focus{
+.modal-toggle:focus {
     outline: none !important;
 }
 
@@ -445,7 +458,7 @@ div.modal.fade {
     background-position: center !important;
 }
 
-.modal-image--poster{
+.modal-image--poster {
     border-radius: inherit;
     width: inherit;
     height: inherit;
@@ -453,7 +466,7 @@ div.modal.fade {
 
 .modal-content.modal-delete {
     height: auto;
-    border-top: 7px solid #FF5722 ;
+    border-top: 7px solid #FF5722;
 }
 
 .modal-title {
@@ -478,9 +491,11 @@ button.close:hover {
 button.close:focus {
     outline: none;
 }
+
 .mdl-textfield {
     position: relative;
 }
+
 .fas.fa-search {
     font-size: 1.5em;
     position: absolute;
@@ -488,7 +503,7 @@ button.close:focus {
     color: #3b9388;
 }
 
-.row--bottom-quote{
+.row--bottom-quote {
     width: 100%;
     position: absolute;
     bottom: 15px;
@@ -501,11 +516,114 @@ button.close:focus {
     /*position: absolute;*/
     /*top: 15px;*/
 }
+
 .col--bottom-quote {
     border-radius: 10px;
     /*border-left: 7px solid #FF5722 ;*/
     /*border-right: 7px solid #FF5722 ;*/
 }
+
 #bottom_quote {
     font-family: 'Nunito', sans-serif;
 }
+
+
+/* ============= CAROUSEL ===========*/
+
+.carousel-inner {
+    height: 70px;
+}
+
+.carousel-item {
+    top: 10px;
+}
+
+/* show 3 items */
+.carousel-inner .active,
+.carousel-inner .active + .carousel-item,
+.carousel-inner .active + .carousel-item + .carousel-item,
+.carousel-inner .active + .carousel-item + .carousel-item + .carousel-item {
+    display: block;
+}
+
+.carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left),
+.carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left) + .carousel-item,
+.carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left) + .carousel-item + .carousel-item,
+.carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left) + .carousel-item + .carousel-item + .carousel-item {
+    transition: none;
+}
+
+.carousel-inner .carousel-item-next,
+.carousel-inner .carousel-item-prev {
+    position: relative;
+    transform: translate3d(0, 0, 0);
+}
+
+.carousel-inner .active.carousel-item + .carousel-item + .carousel-item + .carousel-item + .carousel-item {
+    position: absolute;
+    top: 0;
+    right: -25%;
+    z-index: -1;
+    display: block;
+    visibility: visible;
+}
+
+/* left or forward direction */
+.active.carousel-item-left + .carousel-item-next.carousel-item-left,
+.carousel-item-next.carousel-item-left + .carousel-item,
+.carousel-item-next.carousel-item-left + .carousel-item + .carousel-item,
+.carousel-item-next.carousel-item-left + .carousel-item + .carousel-item + .carousel-item,
+.carousel-item-next.carousel-item-left + .carousel-item + .carousel-item + .carousel-item + .carousel-item {
+    position: relative;
+    transform: translate3d(-100%, 0, 0);
+    transition: all 500ms;
+    visibility: visible;
+}
+
+/* farthest right hidden item must be also position for animations */
+.carousel-inner .carousel-item-prev.carousel-item-right {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    display: block;
+    visibility: visible;
+}
+
+/* right or prev direction */
+.active.carousel-item-right + .carousel-item-prev.carousel-item-right,
+.carousel-item-prev.carousel-item-right + .carousel-item,
+.carousel-item-prev.carousel-item-right + .carousel-item + .carousel-item,
+.carousel-item-prev.carousel-item-right + .carousel-item + .carousel-item + .carousel-item,
+.carousel-item-prev.carousel-item-right + .carousel-item + .carousel-item + .carousel-item + .carousel-item {
+    position: relative;
+    transform: translate3d(100%, 0, 0);
+    transition: all 500ms;
+    visibility: visible;
+    display: block;
+}
+
+span.carousel-control-next-icon, span.carousel-control-prev-icon {
+    width: 20px;
+}
+
+a[role="button"] {
+    background-color: #1e4865;
+    top: 50%;
+    transform: translateY(-60%);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+a.carousel-control-prev {
+    position: absolute;
+    left: -20px;
+}
+
+a.carousel-control-next {
+    position: absolute;
+    right: -20px;
+}
+
+

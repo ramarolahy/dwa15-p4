@@ -16,12 +16,15 @@
       rel="stylesheet">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 <!--    JAVASCRIPT AND JQUERY   -->
-<script src="{{asset('/js/html2canvas.min.js')}}"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" defer></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous" ></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-        crossorigin="anonymous" defer></script>
-<script src="https://code.getmdl.io/1.3.0/material.min.js" defer></script>
+        crossorigin="anonymous"></script>
+<script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+<script src="{{asset('/js/html2canvas.min.js')}}"></script>
+<script src="{{asset('/js/poster.js')}}"></script>
 <!--    CUSTOM STYLESHEET   -->
 <link rel="stylesheet" href="{{asset('/css/styles.css')}}">
 

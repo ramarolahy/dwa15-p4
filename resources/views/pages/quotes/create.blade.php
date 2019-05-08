@@ -13,36 +13,50 @@
                 <div class="card form-poster px-4 pb-2">
                     <!-- Background selection -->
                     <div class="card-body">
-                        <h5 class="mdl-card__title-text">Choose Background<br>
-                            <span class="small">(Leave empty for a random background)</span>
+                        <h5 class="mdl-card__title-text">*Choose Background<br>
+{{--                            <span class="small">(Leave empty for a random background)</span>--}}
                         </h5>
                     </div>
-                    <div class="card-body row wrap-card-body__radio">
-                        @foreach($backgrounds as $choice)
-                            <div class="col-3">
-                                <label class="" for='{{$choice->id}}-{{$choice->filename}}'>
-                                    <input type="radio" id='{{$choice->id}}-{{$choice->filename}}'
-                                           class="mdl-radio__button"
-                                           name="selectedBg"
-                                           data-id="{{$choice->id}}"
-                                           value={{$choice->filename}}
-                                           @if ( $selectedBg === $choice->filename ) checked @endif >
-                                    <img src="{{ asset('/images/' . $choice->filename) }} " alt="road">
-                                </label>
+                    <div class="card-body row wrap-card-body__radio py-0">
+                        <div id="background-carousel" class="carousel slide border-dark w-100"
+                             data-ride="carousel" data-interval="false">
+                            <div class="carousel-inner row w-100 mx-auto" role="listbox">
+                                @foreach($backgrounds as $choice)
+                                    <div class="carousel-item col-md-3 {{$choice->id === 1 ? 'active' : null}}">
+                                        <label class="" for='{{$choice->id}}-{{$choice->filename}}'>
+                                            <input type="radio" id='{{$choice->id}}-{{$choice->filename}}'
+                                                   class="mdl-radio__button"
+                                                   name="selectedBg"
+                                                   data-id="{{$choice->id}}"
+                                                   value={{$choice->filename}}
+                                                   @if ( $selectedBg === $choice->filename ) checked @endif required>
+                                            <img src="{{ asset('/images/backgrounds/' . $choice->filename) }} " alt="road">
+                                        </label>
+                                    </div>
+                                @endforeach
                             </div>
-                        @endforeach
+                            <a class="carousel-control-prev" href="#background-carousel" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#background-carousel" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+
                     </div>
                     <!-- END Background selection -->
 
                     <!-- Quote and Author input -->
                     <div class="card-body">
-                        <h5 class="mdl-card__title-text">Add your quote</h5>
+                        <h5 class="mdl-card__title-text">*Add your quote</h5>
                         <div class="mdl-textfield mdl-js-textfield">
                             <!--If filled, leave text on input area
                             in case
                                 the user needs to make correction-->
                             <textarea class="mdl-textfield__input" rows="3" id="quote" name="quote">{{ $quote ? $quote : null }}</textarea>
-                            <label class="mdl-textfield__label" for="quote">*Enter nice quote here...</label>
+                            <label class="mdl-textfield__label" for="quote">Enter nice quote here...</label>
                         </div>
                         <!--If left empty, print error message-->
                         @include('includes._error_field', ['fieldName' => 'quote'])
@@ -57,7 +71,7 @@
                                    value="{{ $author ? $author : null }}"
                             >
                             <label class="mdl-textfield__label"
-                                   for="author">*Who said it?...</label>
+                                   for="author">Who said it?...</label>
 
                         </div>
                         <!--If left empty, print error message-->
@@ -67,8 +81,8 @@
                     <!-- END Quote and Author input -->
 
                     <!-- Text background -->
-                    <div class="card bg-light border-0 mb-2 py-3 px-3">
-                        <div class="card-body">
+                    <div class="card bg-light border-0 mb-2 px-3">
+                        <div class="card-body py-2">
                             <div class="row">
                                 <div class="col-10">
                                     <label
@@ -153,7 +167,7 @@
             <!-- END Poster div -->
             <br>
             @if ( count($errors) == 0 and $quote)
-                <form action="/save{{$posterId ? '/'.$posterId : null}}" method="POST" enctype="multipart/form-data">
+                <form id="form--save-poster" action="/save{{$posterId ? '/'.$posterId : null}}" method="POST" enctype="multipart/form-data">
                     {{$posterId ? method_field('put') : null}}
                     {{ csrf_field () }}
                     <input type="hidden" id="posterId" name="posterId" value="{{$posterId}}">
@@ -162,7 +176,7 @@
                     <input type="hidden" id="author" name="author" value="{{$author}}">
                     <input type="hidden" id="text_background" name="text_background" value="{{$addTxtBg}}">
                     <input type="hidden" id="file" name="file">
-                    <button class=" float-right mdl-button mdl-js-button mdl-button--raised
+                    <button id="button--save-poster" class=" float-right mdl-button mdl-js-button mdl-button--raised
                                 mdl-js-ripple-effect mdl-button--accent text-white button-save" type="submit">
                         Save Poster
                     </button>
@@ -174,7 +188,8 @@
     <!-- END Quote Maker -->
     <div class="row row--bottom-quote px-5">
         <div class=" col--bottom-quote border-1 bg-white col-12">
-            <h6 id="bottom_quote" class="text-center py-0 mx-auto my-2">“Nothing is impossible, the word itself says 'I'm possible'!”<br>
+            <h6 id="bottom_quote" class="text-center py-0 mx-auto my-2">
+                “Nothing is impossible, the word itself says 'I'm possible'!”<br>
                 <em>- Audrey Hepburn -</em>
             </h6>
         </div>
@@ -185,11 +200,12 @@
 @section('script')
     <script>
         html2canvas(document.getElementById("myQuote")).then(canvas => {
+            document.getElementById("quoteImg").innerHTML = '';
             document.getElementById("quoteImg").appendChild(canvas);
             const fileElement = document.getElementById('file');
             if (fileElement) {
                 fileElement.value = canvas.toDataURL("image/png");
             }
-        });
+        })
     </script>
 @stop
