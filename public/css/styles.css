@@ -134,6 +134,7 @@ div.message-invite {
     font-family: Nunito, sans-serif;
     font-size: 1.2em;
     color: #FF5722;
+    z-index: 99;
 }
 
 div.card-header.card-header__auth {
