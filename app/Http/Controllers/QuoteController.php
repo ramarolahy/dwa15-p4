@@ -6,6 +6,7 @@
     use Illuminate\Http\Request;
     use Illuminate\Support\Facades\File;
     use Intervention\Image\ImageManager;
+    use Illuminate\Support\Facades\Storage;
     use App\User;
     use App\Poster;
     use App\Background;
@@ -54,7 +55,14 @@
             // This will open/create a filename, write image on to filename,
             // then close it.
             // SEE https://www.php.net/manual/en/function.file-put-contents.php
+
             file_put_contents ('uploads/'.$filename, $decodedImage);
+
+            // Trying to save posters to AWS S3;
+           /* $s3 = Storage::disk ('s3');
+            $filePath = '/user_posters/'.$filename;
+            $s3->put ($filePath, file_get_contents ($imageBase64), 'public');*/
+
             // Query for the background to associate to the poster
             $background = Background::where ('id', '=', $background_id)->first ();
             $user_id = Auth::id ();

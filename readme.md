@@ -18,6 +18,7 @@
 + barryvdh/laravel-debugbar
 + intervention/image
 + laravelcollective/html
++ league/flysystem-aws-s3-v3
 
 ## Feature summary
 + Visitors can view  a list of quote posters created by other visitors.

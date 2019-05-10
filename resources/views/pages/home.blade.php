@@ -59,7 +59,7 @@
                                 <div class="mdl-card__actions clearfix">
                                     <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect button-action button-action--share float-left"
                                        href="javascript:fbShare('{{URL::asset('uploads/'.$poster->filename)}}', 'Facebook Share', 'Facebook share popup', null, 600, 350)">
-                                        Share
+                                        <i class="fab fa-facebook-f"></i>
                                     </a>
                                     <!-- Button trigger delete confirmation modal -->
                                     <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect button-action button-action--delete float-right" type="button" data-toggle="modal" data-target="#{{'modal_delete_'.$poster->id}}">
@@ -139,7 +139,7 @@
                             <div class="mdl-card__actions clearfix">
                                 <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect button-action button-action--share float-left"
                                    href="javascript:fbShare('{{URL::asset('uploads/'.$poster->filename)}}', 'Facebook Share', 'Facebook share popup', null, 600, 350)">
-                                    Share
+                                    <i class="fab fa-facebook-f"></i>
                                 </a>
                             </div>
                             <button class="modal-toggle" type="button" id="{{'modal_btn_'.$poster->id}}" data-toggle="modal" data-target="#{{'modal_poster_'.$poster->id}}"></button>
@@ -192,7 +192,7 @@
                                 <div class="mdl-card__actions clearfix">
                                     <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect button-action button-action--share float-left"
                                        href="javascript:fbShare('{{URL::asset('uploads/'.$poster->filename)}}', 'Facebook Share', 'Facebook share popup', null, 600, 350)">
-                                        Share
+                                        <i class="fab fa-facebook-f"></i>
                                     </a>
                                 </div>
                                 <button class="modal-toggle" type="button" id="{{'modal_btn_'.$poster->id}}" data-toggle="modal" data-target="#{{'modal_poster_'.$poster->id}}"></button>
