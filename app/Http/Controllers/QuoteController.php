@@ -39,6 +39,7 @@
             $quote = \request ('quote');
             $text_background = \request ('text_background') || 0;
             $background_id = \request ('background_id');
+            $design = \request ('design');
             // Construct filename
             $filename = $this->setFilename ($author, $quote,
                                             $text_background,
@@ -59,9 +60,9 @@
             file_put_contents ('uploads/'.$filename, $decodedImage);
 
             // Trying to save posters to AWS S3;
-           /* $s3 = Storage::disk ('s3');
-            $filePath = '/user_posters/'.$filename;
-            $s3->put ($filePath, file_get_contents ($imageBase64), 'public');*/
+            /* $s3 = Storage::disk ('s3');
+             $filePath = '/user_posters/'.$filename;
+             $s3->put ($filePath, file_get_contents ($imageBase64), 'public');*/
 
             // Query for the background to associate to the poster
             $background = Background::where ('id', '=', $background_id)->first ();
@@ -72,6 +73,7 @@
             $poster->quote = $quote;
             $poster->text_background = $text_background;
             $poster->background ()->associate ($background);
+            $poster->design = $design;
             $poster->user ()->associate ($user);
             $poster->filename = $filename;
             // Save new poster
@@ -126,14 +128,17 @@
          */
         public function create () {
             $state = [
-                'posterId'      => null,
-                'textBg'        => 'quote-text__bg',
-                'imgBg'         => null,
-                'selectedBg'    => null,
-                'quote'         => null,
-                'author'        => null,
-                'addBackground' => null,
-                'backgrounds'   => $this->listBackgrounds ()
+                'posterId'         => null,
+                'textBg'           => 'quote-text__bg',
+                'background_id'    => null,
+                'background_image' => null,
+                'background'       => null,
+                'quote'            => null,
+                'author'           => null,
+                'addTxtBg'         => null,
+                'design'           => null,
+                'designChoices'    => ['design_1', 'design_2', 'design_3', 'design_4', 'design_5'],
+                'backgrounds'      => $this->listBackgrounds ()
             ];
             //dump($state);
             return view ('pages.quotes.create', $state);
@@ -153,12 +158,13 @@
                                                     'quote'        => 'required',
                                                     'myBackground' => 'file|image|mimes:jpeg,jpg,png,gif|max:2048'
                                                 ]);
-            $selectedBg = \request ('selectedBg');
+            $background = \request ('background');
             // Get collection of bg images in storage
             $bgImages = $this->listBackgrounds ();
-            if ($selectedBg) {
-                $imgBg = asset ('/images/backgrounds/'.$selectedBg);
-                $imgBg_id = Background::where ('filename', '=', $selectedBg)
+            if ($background) {
+                $background_image = asset ('/images/backgrounds/'.$background);
+                $background_id = Background::where ('filename', '=',
+                                                    $background)
                     ->first ()->id;
             }
             else {
@@ -169,25 +175,28 @@
                 // Get bg from db
                 $randBackground = Background::where ('id', '=', $randId)->first ();
                 $randFile = $randBackground->filename;
-                $imgBg_id = $randBackground->id;
-                $imgBg = asset ('/images/'.$randFile);
+                $background_id = $randBackground->id;
+                $background_image = asset ('/images/'.$randFile);
             }
             $posterId = \request ('posterId');
             $quote = htmlentities ($validateData['quote']);
             $author = htmlentities ($validateData['author']);
             $addTxtBg = \request ('addTxtBg') || 0;
+            $design = \request ('design');
             $textBg = 'quote-text__bg';
 
             $state = [
-                'posterId'    => $posterId,
-                'textBg'      => $textBg,
-                'imgBg'       => $imgBg,
-                'imgBg_id'    => $imgBg_id,
-                'selectedBg'  => $selectedBg,
-                'quote'       => $quote,
-                'author'      => $author,
-                'addTxtBg'    => $addTxtBg,
-                'backgrounds' => $this->listBackgrounds ()
+                'posterId'         => $posterId,
+                'textBg'           => $textBg,
+                'background_image' => $background_image,
+                'background_id'    => $background_id,
+                'background'       => $background,
+                'quote'            => $quote,
+                'author'           => $author,
+                'addTxtBg'         => $addTxtBg,
+                'design'           => $design,
+                'designChoices'    => ['design_1', 'design_2', 'design_3', 'design_4', 'design_5'],
+                'backgrounds'      => $this->listBackgrounds ()
             ];
 
             return view ('pages.quotes.create', $state);
@@ -199,19 +208,22 @@
          * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
          */
         public function edit (Request $request) {
-            $imgBg = Background::where ('id', '=', $request['background_id'])
+            $background_image = Background::where ('id', '=', $request['background_id'])
                 ->first ();
             $textBg = 'quote-text__bg';
             $state = [
-                'posterId'    => $request['posterId'],
-                'textBg'      => $textBg,
-                'imgBg'       => asset ('/images/backgrounds/'.$imgBg->filename),
-                'imgBg_id'    => $request['background_id'],
-                'selectedBg'  => $imgBg->filename,
-                'quote'       => $request['quote'],
-                'author'      => $request['author'],
-                'addTxtBg'    => $request['text_background'],
-                'backgrounds' => $this->listBackgrounds ()
+                'posterId'         => $request['posterId'],
+                'textBg'           => $textBg,
+                'background_image' => asset ('/images/backgrounds/'
+                                             .$background_image->filename),
+                'background_id'    => $request['background_id'],
+                'background'       => $background_image->filename,
+                'quote'            => $request['quote'],
+                'author'           => $request['author'],
+                'addTxtBg'         => $request['text_background'],
+                'design'           => $request['design'],
+                'designChoices'    => ['design_1', 'design_2', 'design_3', 'design_4', 'design_5'],
+                'backgrounds'      => $this->listBackgrounds ()
             ];
 
             return view ('pages.quotes.create', $state);

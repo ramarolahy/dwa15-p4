@@ -16,6 +16,7 @@
                 $table->bigIncrements ( 'id' );
                 $table->string ( 'author' );
                 $table->string ( 'quote' );
+                $table->string ( 'design' )->default ('design_1');
                 $table->boolean ( 'text_background' );
                 $table->string('filename');
                 $table->timestamps ();

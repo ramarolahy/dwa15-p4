@@ -13,6 +13,7 @@
 + https://laracasts.com/discuss/channels/general-discussion/facebook-share?page=0
 + https://stackoverflow.com/ : Many random tips
 + https://stackoverflow.com/questions/14829040/facebook-sharer-popup-window : Facebook popup
++ https://stackoverflow.com/questions/2644299/jquery-removeclass-wildcard
 
 ## Packages
 + barryvdh/laravel-debugbar

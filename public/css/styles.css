@@ -169,21 +169,80 @@ a {
     position: relative;
 }
 
+#designSelection {
+    background: transparent;
+    width: 608px;
+    position: fixed;
+    z-index: 99;
+    top: 140px;
+    right: 280px;
+}
 .quote-text__bg {
     background-color: rgba(0, 0, 0, 0.50);
-}
-
-.quote-text {
-    position: absolute;
     border-top: 2px solid black;
     border-bottom: 2px solid black;
+}
+
+/*=======DESIGN 1=============*/
+
+div.quote-text.design_1 {
+    position: absolute;
     border-radius: 5px;
     bottom: 1%;
     left: 1%;
     width: 98%;
     height: auto;
 }
-
+/*=============================*/
+/*=======DESIGN 2=============*/
+div.quote-text.design_2 {
+    position: absolute;
+    border-radius: 5px;
+    top: 1%;
+    left: 1%;
+    width: 98%;
+    height: auto;
+}
+/*=============================*/
+/*=======DESIGN 3=============*/
+div.quote-text.design_3 {
+    position: absolute;
+    border-radius: 5px;
+    bottom: 50%;
+    -webkit-transform: translateY(50%);
+    -moz-transform: translateY(50%);
+    -ms-transform: translateY(50%);
+    -o-transform: translateY(50%);
+    transform: translateY(50%);
+    left: 1%;
+    width: 98%;
+    height: auto;
+}
+/*=============================*/
+/*=======DESIGN 4=============*/
+div.quote-text.design_4 {
+    text-align: left !important;
+   padding: 2em 0;
+    position: absolute;
+    border-radius: 5px;
+    top: 1%;
+    left: 1%;
+    width: 60%;
+    height: 98%;
+}
+/*=============================*/
+/*=======DESIGN 4=============*/
+div.quote-text.design_5 {
+    text-align: right !important;
+    padding: 2em 0;
+    position: absolute;
+    border-radius: 5px;
+    top: 1%;
+    right: 1%;
+    width: 60%;
+    height: 98%;
+}
+/*=============================*/
 .default_quote {
     position: relative;
     bottom: -50px;
@@ -196,9 +255,19 @@ a {
     width: 100%;
 }
 
+.label--design-choice {
+    width: 60px !important;
+}
+
+#quoteImg {
+    position: absolute;
+    z-index: 2;
+    top: 5px;
+}
 
 .wrap-quote {
     position: relative;
+    top: 5px;
     width: 608px;
     height: 500px;
     background-repeat: no-repeat;
@@ -219,12 +288,6 @@ a {
     position: relative;
 }
 
-#quoteImg {
-    position: absolute;
-    z-index: 2;
-    top: 0;
-}
-
 [type=radio] {
     position: absolute;
     opacity: 0;
@@ -238,9 +301,7 @@ a {
 }
 
 [type=radio]:checked + img {
-    -webkit-box-shadow: 0 0 3px 2px cadetblue;
-    -moz-box-shadow: 0 0 3px 2px cadetblue;
-    box-shadow: 0 0 3px 2px cadetblue;
+    box-shadow: 0 0 0px 3px #FF5722;
 }
 
 .alert-info {
@@ -292,13 +353,14 @@ div.alert.alert-danger {
 }
 
 .button-save {
-    width: 80px;
+    width: auto;
     position: relative;
-    -webkit-transform: translateX(-50%);
-    -moz-transform: translateX(-50%);
-    -ms-transform: translateX(-50%);
-    -o-transform: translateX(-50%);
-    transform: translateX(-50%);
+    left: -50%;
+    -webkit-transform: translateX(50%);
+    -moz-transform: translateX(50%);
+    -ms-transform: translateX(50%);
+    -o-transform: translateX(50%);
+    transform: translateX(50%);
 }
 
 
