@@ -163,9 +163,8 @@
         public function new (Request $request) {
 
             $validateData = $request->validate ([
-                                                    'author'       => 'required',
-                                                    'quote'        => 'required',
-                                                    'myBackground' => 'file|image|mimes:jpeg,jpg,png,gif|max:2048'
+                                                    'author'       => 'required|max:32',
+                                                    'quote'        => 'required|max:255',
                                                 ]);
             $background_id = \request ('background_id');
             $background_image = Background::where ('id', '=', $background_id)

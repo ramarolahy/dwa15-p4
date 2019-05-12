@@ -14,7 +14,7 @@
             Schema::create ( 'posters', function ( Blueprint $table ) {
                 $table->engine = 'InnoDB'; // To allow foreign key.
                 $table->bigIncrements ( 'id' );
-                $table->string ( 'author' );
+                $table->string ( 'author');
                 $table->string ( 'quote' );
                 $table->string ( 'design' )->default ('design_1');
                 $table->boolean ( 'text_overlay' );
