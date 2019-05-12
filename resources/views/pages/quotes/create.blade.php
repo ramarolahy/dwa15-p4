@@ -9,6 +9,25 @@
         <div class="col-form col-5 pl-5">
             <form method="POST" action="/new" enctype="multipart/form-data">
                 {{ csrf_field () }}
+                {{-- Design choices radio buttons --}}
+                <div id="designSelection" class="card-body row wrap-card-body__radio py-0 px-0 mt-3 bg-light ">
+                    @foreach($designChoices as $choice)
+                        <label class="col-2 mr-2" for='design_option--{{$choice}}'>
+                            <input type="radio" id='design_option--{{$choice}}'
+                                   class="mdl-radio__button"
+                                   name="design"
+                                   value={{$choice}}
+                                   @if(old('design'))
+                                   {{old('design') === $choice ? 'checked' : null  }}
+                                   @elseif ( $design === $choice)
+                                       checked
+                            @else
+                                {{$choice === 'design_1' ? 'checked' : null}}
+                                @endif >
+                            <img class="label--design-choice" src="{{ asset('/images/designs/' . $choice.'.png') }}" alt="{{$choice}}">
+                        </label>
+                    @endforeach
+                </div>
                 <input type="hidden" name="posterId" value="{{$posterId}}">
                 <div class="card form-poster px-4 pb-2">
                     <!-- Background selection -->
@@ -22,27 +41,17 @@
                              data-ride="carousel" data-interval="false">
                             <div class="carousel-inner row w-100 mx-auto" role="listbox">
                                 @foreach($backgrounds as $choice)
-                                    <div class="carousel-item col-md-3
-                                    @if($choice->id === $background_id)
-                                    'active'
-                                    @elseif(old('background'))
-                                    {{old('background') === $choice->filename  ? 'active' : null}}
-                                    @else
-                                    {{$choice->id === 1 ? 'active' : null}}
-                                    @endif
-                                        ">
-                                        <label class="" for='{{$choice->id}}-{{$choice->filename}}'>
-                                            <input type="radio" id='{{$choice->id}}-{{$choice->filename}}'
+                                    <div class="carousel-item col-md-3 {{$background_id == $choice->id ? 'active' : null}}">
+                                        <label class="" for='background_{{$choice->id}}'>
+                                            <input type="radio" id='background_{{$choice->id}}'
                                                    class="mdl-radio__button"
-                                                   name="background"
-                                                   data-id="{{$choice->id}}"
-                                                   value="{{$choice->filename}}"
-                                                   @if(old('background'))
-                                                   {{old('background') === $choice->filename ? 'checked' : null}}
-                                                   @elseif( $background === $choice->filename )
-                                                   checked
-                                                   @else
-                                                   {{$choice->id === 1 ? 'checked' : null}}
+                                                   name="background_id"
+                                                   data-filename="{{$choice->filename}}"
+                                                   value="{{$choice->id}}"
+                                                   @if(old('background_id'))
+                                                   {{old('background_id') === strval($choice->id) ? 'checked' : null}}
+                                                   @elseif( $background_id === strval($choice->id) ) checked
+                                                   @else {{$choice->id === 1 ? 'checked' : null}}
                                                    @endif
                                                    required>
                                             <img src="{{ asset('/images/backgrounds/' . $choice->filename) }} " alt="{{$choice->filename}}">
@@ -70,7 +79,7 @@
                             <!--If filled, leave text on input area
                             in case
                                 the user needs to make correction-->
-                            <textarea class="mdl-textfield__input" rows="3" id="quote" name="quote" required>{{ old('quote', $quote)}}</textarea>
+                            <textarea class="mdl-textfield__input" rows="5" id="quote" name="quote" required>{{ old('quote', $quote)}}</textarea>
                             <label class="mdl-textfield__label" for="quote">Enter nice quote here...</label>
                         </div>
                         <!--If left empty, print error message-->
@@ -103,16 +112,16 @@
                                 <div class="col-12">
                                     <label
                                         class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
-                                        for="addTxtBg">
+                                        for="text_overlay">
                                         <!--If previously checked,
                                         leave checked, unless there
                                         was error-->
                                         <input type="checkbox"
-                                               id="addTxtBg"
+                                               id="text_overlay"
                                                class="mdl-checkbox__input"
-                                               name="addTxtBg"
+                                               name="text_overlay"
                                                value="1"
-                                            {{ $addTxtBg === 1 ? 'checked' : null}}
+                                            {{ $text_overlay ? 'checked' : null}}
                                         >
                                         <span class="mdl-checkbox__label mdl-card__title-text">
                                             Add text overlay (For light backgrounds)
@@ -138,25 +147,6 @@
                                          </span>
                                      </label>
                                  </div>--}}
-                            </div>
-                            {{-- Design choices radio buttons --}}
-                            <div id="designSelection" class="card-body row wrap-card-body__radio py-0 px-0 mt-3 bg-light ">
-                                @foreach($designChoices as $choice)
-                                    <label class="col-2 mr-2" for='design_option--{{$choice}}'>
-                                        <input type="radio" id='design_option--{{$choice}}'
-                                               class="mdl-radio__button"
-                                               name="design"
-                                               value={{$choice}}
-                                               @if(old('design'))
-                                               {{old('design') === $choice ? 'checked' : null  }}
-                                               @elseif ( $design === $choice)
-                                                   checked
-                                        @else
-                                            {{$choice === 'design_1' ? 'checked' : null}}
-                                            @endif >
-                                        <img class="label--design-choice" src="{{ asset('/images/designs/' . $choice.'.png') }}" alt="{{$choice}}">
-                                    </label>
-                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -198,8 +188,8 @@
                     <!-- Poster div -->
                     <div class="wrap-quote mdl-card mdl-shadow--2dp"
                          style="
-                         @if($background_image)
-                             background-image:url({{ $background_image }});
+                         @if($background_url)
+                             background-image:url({{ $background_url }});
                          @else
                              background-color:#313f48;
                          @endif
@@ -214,7 +204,7 @@
                                 <span class="text__top">~~~</span>
                             </div>
                         @else
-                            <div id="quotePoster" class="py-5 px-4 @if ( isset( $addTxtBg ) and $addTxtBg ) {{ $textBg }} @endif quote-text {{$design}} text-center ">
+                            <div id="quotePoster" class="py-5 px-4 @if ( isset( $text_overlay ) and $text_overlay ) {{ $overlay_class }} @endif quote-text {{$design}} text-center ">
                                 <!--If there are no errors, print quote and
                                 author-->
                                 <span class="my-5 text__top">"{{ $quote }}"</span>
@@ -239,7 +229,7 @@
                     <input style="display: none;" id="background_id" name="background_id" value="{{$background_id}}">
                     <input style="display: none;" id="quote" name="quote" value="{{$quote}}">
                     <input style="display: none;" id="author" name="author" value="{{$author}}">
-                    <input style="display: none;" id="text_background" name="text_background" value="{{$addTxtBg}}">
+                    <input style="display: none;" id="text_overlay" name="text_overlay" value="{{$text_overlay}}">
                     <input style="display: none;" id="design" name="design" value="{{$design}}">
                     <input style="display: none;" id="file" name="file">
                     <button id="button--save-poster" class=" float-right mdl-button mdl-js-button mdl-button--raised

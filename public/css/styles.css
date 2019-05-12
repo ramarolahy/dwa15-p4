@@ -172,10 +172,10 @@ a {
 #designSelection {
     background: transparent;
     width: 608px;
-    position: fixed;
+    position: absolute;
     z-index: 99;
-    top: 140px;
-    right: 280px;
+    top: 5px;
+    right: -650px;
 }
 .quote-text__bg {
     background-color: rgba(0, 0, 0, 0.50);

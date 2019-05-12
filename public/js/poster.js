@@ -34,9 +34,9 @@ $(document).ready(function () {
     /**
      * Handles background selection and shows preview on poster
      */
-    $('input[name="background"]').on('change', function (evt) {
-        const background = $(evt.target).val();
-        const background_id = $(evt.target).data('id');
+    $('input[name="background_id"]').on('change', function (evt) {
+        const background_id = $(evt.target).val();
+        const background = $(evt.target).data('filename');
         $('#myQuote').css('background-color', `transparent`).css('background-image', `url('../images/backgrounds/${background}')`);
         $('#background_id').attr('value', `${background_id}`);
        renderImage();
@@ -52,4 +52,6 @@ $(document).ready(function () {
        $('#design').attr('value', `${design}`);
         renderImage();
     });
+
+
 });

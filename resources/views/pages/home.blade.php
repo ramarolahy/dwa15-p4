@@ -71,7 +71,7 @@
                                         <input type="hidden" name="background_id" value="{{$poster->background_id}}">
                                         <input type="hidden" name="quote" value="{{$poster->quote}}">
                                         <input type="hidden" name="author" value="{{$poster->author}}">
-                                        <input type="hidden" name="text_background" value="{{$poster->text_background}}">
+                                        <input type="hidden" name="text_overlay" value="{{$poster->text_overlay}}">
                                         <input type="hidden" name="design" value="{{$poster->design}}">
                                         <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect button-action button-action--edit float-right">
                                             <i class="material-icons">edit</i>

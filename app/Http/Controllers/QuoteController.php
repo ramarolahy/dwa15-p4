@@ -37,12 +37,12 @@
             }
             $author = \request ('author');
             $quote = \request ('quote');
-            $text_background = \request ('text_background') || 0;
+            $text_overlay = \request ('text_overlay') || 0;
             $background_id = \request ('background_id');
             $design = \request ('design');
             // Construct filename
             $filename = $this->setFilename ($author, $quote,
-                                            $text_background,
+                                            $text_overlay,
                                             $background_id);
             // Store base64 image file
             $imageBase64 = \request ('file');
@@ -71,7 +71,7 @@
 
             $poster->author = $author;
             $poster->quote = $quote;
-            $poster->text_background = $text_background;
+            $poster->text_overlay = $text_overlay;
             $poster->background ()->associate ($background);
             $poster->design = $design;
             $poster->user ()->associate ($user);
@@ -127,18 +127,27 @@
          * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
          */
         public function create () {
+            // Defaults
+            $background_image = Background::where ('id', '=', 1)->first ()
+                ->filename;
+            $background_url = asset ('/images/backgrounds/'.$background_image);
+            $quote = 'A nice quote for a nice day!';
+            $author = 'PrettyQuotes';
+            $design = 'design_1';
+            $designChoices = ['design_1', 'design_2', 'design_3', 'design_4',
+                'design_5'
+            ];
             $state = [
-                'posterId'         => null,
-                'textBg'           => 'quote-text__bg',
-                'background_id'    => null,
-                'background_image' => null,
-                'background'       => null,
-                'quote'            => null,
-                'author'           => null,
-                'addTxtBg'         => null,
-                'design'           => null,
-                'designChoices'    => ['design_1', 'design_2', 'design_3', 'design_4', 'design_5'],
-                'backgrounds'      => $this->listBackgrounds ()
+                'posterId'       => null,
+                'overlay_class'  => 'quote-text__bg',
+                'background_id'  => 1,
+                'background_url' => $background_url,
+                'quote'          => $quote,
+                'author'         => $author,
+                'text_overlay'   => 1,
+                'design'         => $design,
+                'designChoices'  => $designChoices,
+                'backgrounds'    => $this->listBackgrounds ()
             ];
             //dump($state);
             return view ('pages.quotes.create', $state);
@@ -158,45 +167,35 @@
                                                     'quote'        => 'required',
                                                     'myBackground' => 'file|image|mimes:jpeg,jpg,png,gif|max:2048'
                                                 ]);
-            $background = \request ('background');
+            $background_id = \request ('background_id');
+            $background_image = Background::where ('id', '=', $background_id)
+                ->first ()->filename;
+            $background_url = asset ('/images/backgrounds/'.$background_image);
+
             // Get collection of bg images in storage
             $bgImages = $this->listBackgrounds ();
-            if ($background) {
-                $background_image = asset ('/images/backgrounds/'.$background);
-                $background_id = Background::where ('filename', '=',
-                                                    $background)
-                    ->first ()->id;
-            }
-            else {
-                // Get bg count to use with rand()
-                $bgImageCount = $bgImages->count ();
-                // Generate random bg id
-                $randId = rand (1, $bgImageCount);
-                // Get bg from db
-                $randBackground = Background::where ('id', '=', $randId)->first ();
-                $randFile = $randBackground->filename;
-                $background_id = $randBackground->id;
-                $background_image = asset ('/images/'.$randFile);
-            }
+
             $posterId = \request ('posterId');
             $quote = htmlentities ($validateData['quote']);
             $author = htmlentities ($validateData['author']);
-            $addTxtBg = \request ('addTxtBg') || 0;
+            $text_overlay = \request ('text_overlay') || 1;
             $design = \request ('design');
-            $textBg = 'quote-text__bg';
+            $overlay_class = 'quote-text__bg';
+            $designChoices = ['design_1', 'design_2', 'design_3', 'design_4',
+                'design_5'
+            ];
 
             $state = [
-                'posterId'         => $posterId,
-                'textBg'           => $textBg,
-                'background_image' => $background_image,
-                'background_id'    => $background_id,
-                'background'       => $background,
-                'quote'            => $quote,
-                'author'           => $author,
-                'addTxtBg'         => $addTxtBg,
-                'design'           => $design,
-                'designChoices'    => ['design_1', 'design_2', 'design_3', 'design_4', 'design_5'],
-                'backgrounds'      => $this->listBackgrounds ()
+                'posterId'       => $posterId, // Needed for Update
+                'overlay_class'  => $overlay_class,
+                'background_url' => $background_url,
+                'background_id'  => $background_id,
+                'quote'          => $quote,
+                'author'         => $author,
+                'text_overlay'   => $text_overlay,
+                'design'         => $design,
+                'designChoices'  => $designChoices,
+                'backgrounds'    => $bgImages,
             ];
 
             return view ('pages.quotes.create', $state);
@@ -209,21 +208,23 @@
          */
         public function edit (Request $request) {
             $background_image = Background::where ('id', '=', $request['background_id'])
-                ->first ();
-            $textBg = 'quote-text__bg';
+                ->first ()->filename;
+            $overlay_class = 'quote-text__bg';
+            $designChoices = ['design_1', 'design_2', 'design_3', 'design_4',
+                'design_5'];
+            $backgrounds = $this->listBackgrounds ();
             $state = [
                 'posterId'         => $request['posterId'],
-                'textBg'           => $textBg,
-                'background_image' => asset ('/images/backgrounds/'
-                                             .$background_image->filename),
+                'overlay_class'    => $overlay_class,
+                'background_url' => asset ('/images/backgrounds/'
+                                             .$background_image),
                 'background_id'    => $request['background_id'],
-                'background'       => $background_image->filename,
                 'quote'            => $request['quote'],
                 'author'           => $request['author'],
-                'addTxtBg'         => $request['text_background'],
+                'text_overlay'     => $request['text_overlay'],
                 'design'           => $request['design'],
-                'designChoices'    => ['design_1', 'design_2', 'design_3', 'design_4', 'design_5'],
-                'backgrounds'      => $this->listBackgrounds ()
+                'designChoices'    => $designChoices,
+                'backgrounds'      => $backgrounds
             ];
 
             return view ('pages.quotes.create', $state);
@@ -233,12 +234,12 @@
          * Method to construct the image filename
          * @param string $author
          * @param string $quote
-         * @param int $textBg
+         * @param int $overlay_class
          * @param int $bgID
          * @return string: authorname_firstthreewords_[int][int].png
          */
         public function setFilename (string $author, string $quote, int $bgID,
-            int $textBg = 0) {
+            int $overlay_class = 0) {
             // Remove non a-zA-Z spaces in author and quotes (first three words)
             // and change to lowercase
             $pattern = '/([^a-zA-Z]|\s)/i';
@@ -250,7 +251,7 @@
             // Remove special characters and spaces
             $quoteToLower = strtolower (preg_replace ($pattern, '', $firstThreeWords));
             // return file name as authorname_firstthreewords_[int][int].png
-            return $authorToLower.'_'.$quoteToLower.'_'.$textBg.$bgID.'.png';
+            return $authorToLower.'_'.$quoteToLower.'_'.$overlay_class.$bgID.'.png';
         }
 
     }

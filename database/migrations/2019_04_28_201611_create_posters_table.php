@@ -17,7 +17,7 @@
                 $table->string ( 'author' );
                 $table->string ( 'quote' );
                 $table->string ( 'design' )->default ('design_1');
-                $table->boolean ( 'text_background' );
+                $table->boolean ( 'text_overlay' );
                 $table->string('filename');
                 $table->timestamps ();
             } );
