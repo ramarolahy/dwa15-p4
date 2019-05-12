@@ -176,8 +176,8 @@
             $bgImages = $this->listBackgrounds ();
 
             $posterId = \request ('posterId');
-            $quote = htmlentities ($validateData['quote']);
-            $author = htmlentities ($validateData['author']);
+            $quote = $validateData['quote'];
+            $author = $validateData['author'];
             $text_overlay = \request ('text_overlay') || 1;
             $design = \request ('design');
             $overlay_class = 'quote-text__bg';
