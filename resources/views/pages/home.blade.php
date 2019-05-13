@@ -90,9 +90,6 @@
                                             <h5 class="modal-title text-center" id="{{'modal_delete_label'.$poster->id}}">
                                                 Are you sure you want to delete this poster?
                                             </h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true"><i class="far fa-times-circle"></i></span>
-                                            </button>
                                         </div>
                                         <form action="{{'/delete/'.$poster->id}}" method="POST">
                                             {{ method_field('delete') }}
@@ -151,9 +148,6 @@
                                         <h5 class="modal-title text-center" id="{{'modal_delete_label'.$poster->id}}">
                                             Are you sure you want to delete this poster?
                                         </h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true"><i class="far fa-times-circle"></i></span>
-                                        </button>
                                     </div>
                                     <form action="{{'/delete/'.$poster->id}}" method="POST">
                                         {{ method_field('delete') }}
@@ -204,9 +198,6 @@
                                             <h5 class="modal-title text-center" id="{{'modal_delete_label'.$poster->id}}">
                                                 Are you sure you want to delete this poster?
                                             </h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true"><i class="far fa-times-circle"></i></span>
-                                            </button>
                                         </div>
                                         <form action="{{'/delete/'.$poster->id}}" method="POST">
                                             {{ method_field('delete') }}
