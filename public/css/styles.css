@@ -452,7 +452,7 @@ div.row.row-results {
     outline: none !important;
 }
 
-#addButton {
+#addButton, #registerInviteButton {
     position: relative;
     width: 250px;
     height: 215px;

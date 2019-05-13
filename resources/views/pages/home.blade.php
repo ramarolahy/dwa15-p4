@@ -49,10 +49,12 @@
             </div>
         @endguest
         <div class="centered w-100 mx-auto pt-3 pl-5 pr-4">
+            {{-- POSTER LIST FOR AUTHENTICATED USERS --}}
             @if (Auth::check())
                 <div class="poster-row--divider px-4 my-3 text-center">Your Posters</div>
                 <div class="row d-flex justify-content-around">
                     @foreach ($posters as $poster)
+                        {{-- POSTERS BELONGING TO USER --}}
                         @if ($user and $poster->user_id === $user->id)
                             <div class=" mx-3 my-3 demo-card-image mdl-card mdl-shadow--2dp "
                                  style="background-image:url('{{asset ('uploads/' . $poster->filename)}}')">
@@ -126,6 +128,7 @@
                 </div>
                 <div class="poster-row--divider px-4 my-3 text-center">Posters made by others</div>
             @endif
+            {{-- POSTER LIST FOR GUESTS OR POSTERS BELONGING TO OTHER USERS --}}
             <div class="row d-flex justify-content-around">
                 @foreach ($posters as $poster)
                     @guest
@@ -178,6 +181,7 @@
                             </div>
                         </div>
                     @else
+                        {{-- POSTERS BELONGING TO OTHER USERS --}}
                         @if($user and $poster->user_id != $user->id)
                             <div class=" mx-3 my-3 demo-card-image mdl-card mdl-shadow--2dp "
                                  style="background-image:url('{{asset ('uploads/' . $poster->filename)}}')">
@@ -230,9 +234,15 @@
                         @endif
                     @endguest
                 @endforeach
+                @guest
+                    <a href="/register">
+                        <div class="mx-3 my-3" id="registerInviteButton" style="background-image:url('{{asset ('images/plus-square.svg')}}')">
+                        </div>
+                    </a>
+                @endguest
             </div>
-        </div>
 
+        </div>
     </div>
 
 @stop
