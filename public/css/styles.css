@@ -532,6 +532,7 @@ i.fa-facebook-f {
 div.modal.fade {
     background-color: rgba(0, 0, 0, 0.81) !important;
     height: 100vh;
+    cursor: pointer;
 }
 
 .modal-content.modal-poster {
@@ -542,12 +543,13 @@ div.modal.fade {
     background-size: cover !important;
     background-repeat: no-repeat !important;
     background-position: center !important;
+    cursor: pointer;
 }
 
 .modal-image--poster {
     border-radius: inherit;
-    width: inherit;
-    height: inherit;
+    width: 620px;
+    height: auto;
 }
 
 .modal-content.modal-delete {
@@ -562,15 +564,15 @@ div.modal.fade {
 
 button.close {
     position: absolute;
-    top: 10px;
-    right: 17px;
+    top: -30px;
+    right: -150px;
     color: white;
-    font-size: 3em;
+    font-size: 1.8em;
     cursor: pointer;
     z-index: 9999;
 }
 
-button.close:hover {
+i.fa-times-circle:hover {
     color: orangered;
 }
 

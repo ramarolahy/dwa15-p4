@@ -91,7 +91,7 @@
                                                 Are you sure you want to delete this poster?
                                             </h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
+                                                <span aria-hidden="true"><i class="far fa-times-circle"></i></span>
                                             </button>
                                         </div>
                                         <form action="{{'/delete/'.$poster->id}}" method="POST">
@@ -110,16 +110,13 @@
                                 </div>
                             </div>
                             <!-- Modal to show poster -->
-
                             <div class="modal fade" id="{{'modal_poster_'.$poster->id}}" tabindex="-1" role="dialog" aria-hidden="true">
                                 <div id="{{'modal_image_'.$poster->id}}" class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content modal-poster">
                                         <img class="modal-image--poster" src="{{asset ('uploads/' . $poster->filename)}}" alt="{{$poster->filename}}">
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
+                                            <span aria-hidden="true"><i class="far fa-times-circle"></i></span>
                                         </button>
-                                        <div class="modal-body">
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -155,7 +152,7 @@
                                             Are you sure you want to delete this poster?
                                         </h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
+                                            <span aria-hidden="true"><i class="far fa-times-circle"></i></span>
                                         </button>
                                     </div>
                                     <form action="{{'/delete/'.$poster->id}}" method="POST">
@@ -179,7 +176,7 @@
                                 <div class="modal-content modal-poster">
                                     <img class="modal-image--poster" src="{{asset ('uploads/' . $poster->filename)}}" alt="{{$poster->filename}}">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
+                                        <span aria-hidden="true"><i class="far fa-times-circle"></i></span>
                                     </button>
                                     <div class="modal-body">
                                     </div>
@@ -208,7 +205,7 @@
                                                 Are you sure you want to delete this poster?
                                             </h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
+                                                <span aria-hidden="true"><i class="far fa-times-circle"></i></span>
                                             </button>
                                         </div>
                                         <form action="{{'/delete/'.$poster->id}}" method="POST">
@@ -232,7 +229,7 @@
                                     <div class="modal-content modal-poster">
                                         <img class="modal-image--poster" src="{{asset ('uploads/' . $poster->filename)}}" alt="{{$poster->filename}}">
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
+                                            <span aria-hidden="true"><i class="far fa-times-circle"></i></span>
                                         </button>
                                         <div class="modal-body">
                                         </div>
