@@ -160,7 +160,7 @@
         }
 
         /**
-         * Method to GET the create route and initialize the form
+         * Method to print quote poster
          * @param $request
          * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
          */
