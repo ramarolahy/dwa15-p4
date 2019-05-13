@@ -204,7 +204,7 @@
                                 <span class="text__top">~~~</span>
                             </div>
                         @else
-                            <div id="quotePoster" class="py-3 px-4 text-center quote-text @if ( isset( $text_overlay ) and $text_overlay ) {{ $overlay_class }} @endif {{$design}}">
+                            <div id="quotePoster" class="py-4 px-4 text-center quote-text @if ( isset( $text_overlay ) and $text_overlay ) {{ $overlay_class }} @endif {{$design}}">
                                 <!--If there are no errors, print quote and
                                 author-->
                                 <span class="my-5 text__top">"{{ $quote }}"</span>
