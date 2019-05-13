@@ -36,7 +36,7 @@
         <div class="col-2"></div>
         <form id="form-reset" class="col-2 form-inline px-0" action="/">
             <button id="reset-search" class="mx-0 mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="submit">
-                Reset
+                All posters
             </button>
         </form>
     </div>

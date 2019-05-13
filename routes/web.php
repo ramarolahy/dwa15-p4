@@ -6,12 +6,15 @@
     Auth::routes ();
     // READ
     Route::get ('/', 'HomeController@home')->name ('home');
-    Route::post ('/search', 'HomeController@search')->name ('search');
+    Route::get ('/search', 'HomeController@home')->name ('search.get');
+    Route::post ('/search', 'HomeController@search')->name ('search.post');
     // Only logged in users can Create, Update, and Delete Posters
-    Route::get ('/create', 'QuoteController@create')->name ('create');
-    Route::post ('/new', 'QuoteController@new')->name ('new');
     Route::group(['middleware' => 'auth'], function () {
         // CREATE
+        Route::get ('/create', 'QuoteController@create')->name ('create');
+        Route::get ('/new', 'QuoteController@create')->name ('new.get');
+        Route::post ('/new', 'QuoteController@new')->name ('new.post');
+
         Route::get ('/save', 'QuoteController@create')->name ('save.get');
         Route::post ('/save', 'QuoteController@save')->name ('save.post');
         // UPDATE

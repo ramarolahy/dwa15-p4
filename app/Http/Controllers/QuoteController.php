@@ -163,8 +163,8 @@
         public function new (Request $request) {
 
             $validateData = $request->validate ([
-                                                    'author'       => 'required|max:32',
-                                                    'quote'        => 'required|max:255',
+                                                    'author' => 'required|max:32',
+                                                    'quote'  => 'required|max:255',
                                                 ]);
             $background_id = \request ('background_id');
             $background_image = Background::where ('id', '=', $background_id)
@@ -177,7 +177,7 @@
             $posterId = \request ('posterId');
             $quote = $validateData['quote'];
             $author = $validateData['author'];
-            $text_overlay = \request ('text_overlay') || 1;
+            $text_overlay = \request ('text_overlay');
             $design = \request ('design');
             $overlay_class = 'quote-text__bg';
             $designChoices = ['design_1', 'design_2', 'design_3', 'design_4',
@@ -210,22 +210,22 @@
                 ->first ()->filename;
             $overlay_class = 'quote-text__bg';
             $designChoices = ['design_1', 'design_2', 'design_3', 'design_4',
-                'design_5'];
+                'design_5'
+            ];
             $backgrounds = $this->listBackgrounds ();
             $state = [
-                'posterId'         => $request['posterId'],
-                'overlay_class'    => $overlay_class,
+                'posterId'       => $request['posterId'],
+                'overlay_class'  => $overlay_class,
                 'background_url' => asset ('/images/backgrounds/'
-                                             .$background_image),
-                'background_id'    => $request['background_id'],
-                'quote'            => $request['quote'],
-                'author'           => $request['author'],
-                'text_overlay'     => $request['text_overlay'],
-                'design'           => $request['design'],
-                'designChoices'    => $designChoices,
-                'backgrounds'      => $backgrounds
+                                           .$background_image),
+                'background_id'  => $request['background_id'],
+                'quote'          => $request['quote'],
+                'author'         => $request['author'],
+                'text_overlay'   => $request['text_overlay'],
+                'design'         => $request['design'],
+                'designChoices'  => $designChoices,
+                'backgrounds'    => $backgrounds
             ];
-
             return view ('pages.quotes.create', $state);
         }
 

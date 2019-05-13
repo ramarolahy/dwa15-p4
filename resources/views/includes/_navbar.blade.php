@@ -4,10 +4,10 @@
             <div class="mdl-layout__header-row">
                 <a href="{{ route('home') }}"><span class="mdl-layout-title">Pretty quotes <span class="title-for">for&nbsp;{{ $user ? $user->first_name : 'you' }}</span> </span></a>
                 <div class="row-navigation row-navigation__pages">
-                    <a class="mdl-button navigation navigation-quotes mx-2 {{\Request::is('/') ? 'active' : null}} " href="{{ route('home') }}">Quotes</a>
+                    <a class="mdl-button navigation navigation-quotes mx-2 {{\Request::is('/') ? 'active' : null}} " href="{{ route('home') }}">Home</a>
                     @if(Auth::check ())
-                        <a class="mdl-button navigation navigation-create mx-2 {{\Request::is('create') ? 'active' : null}}" href="{{ route('create') }}">
-                            Poster Maker
+                        <a class="mdl-button navigation navigation-create mx-2 {{\Request::is('create' || 'new' || 'edit') ? 'active' : null}}" href="{{ route('create') }}">
+                            Create new
                         </a>
                     @endif
                 </div>

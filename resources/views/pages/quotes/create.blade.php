@@ -112,12 +112,12 @@
                                 <div class="col-12">
                                     <label
                                         class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
-                                        for="text_overlay">
+                                        for="text_overlay_checkbox">
                                         <!--If previously checked,
                                         leave checked, unless there
                                         was error-->
                                         <input type="checkbox"
-                                               id="text_overlay"
+                                               id="text_overlay_checkbox"
                                                class="mdl-checkbox__input"
                                                name="text_overlay"
                                                value="1"
@@ -204,7 +204,7 @@
                                 <span class="text__top">~~~</span>
                             </div>
                         @else
-                            <div id="quotePoster" class="py-4 px-4 text-center quote-text @if ( isset( $text_overlay ) and $text_overlay ) {{ $overlay_class }} @endif {{$design}}">
+                            <div id="quotePoster" class="py-4 px-4 text-center quote-text {{$text_overlay ?  $overlay_class : null }} {{$design}}">
                                 <!--If there are no errors, print quote and
                                 author-->
                                 <span class="my-5 text__top">"{{ $quote }}"</span>
