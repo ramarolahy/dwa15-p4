@@ -123,111 +123,71 @@
         }
 
         /**
-         * Method to GET the create route and initialize the form
-         * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+         * Function to set view state
+         * @param int $poster_id
+         * @param int $background_id
+         * @param string $quote
+         * @param string $author
+         * @param int $text_overlay
+         * @param string $design
+         * @return array $state
          */
-        public function create () {
-            // Defaults
-            $background_image = Background::where ('id', '=', 1)->first ()
-                ->filename;
-            $background_url = asset ('/images/backgrounds/'.$background_image);
-            $quote = 'A nice quote for a nice day!';
-            $author = 'PrettyQuotes';
-            $design = 'design_1';
-            $designChoices = ['design_1', 'design_2', 'design_3', 'design_4',
-                'design_5'
-            ];
-            $state = [
-                'posterId'       => null,
-                'overlay_class'  => 'quote-text__bg',
-                'background_id'  => 1,
-                'background_url' => $background_url,
-                'quote'          => $quote,
-                'author'         => $author,
-                'text_overlay'   => 1,
-                'design'         => $design,
-                'designChoices'  => $designChoices,
-                'backgrounds'    => $this->listBackgrounds ()
-            ];
-            //dump($state);
-            return view ('pages.quotes.create', $state);
-        }
-
-        /**
-         * Method to validate user inputs, and display created poster to
-         * canvas upon validation.
-         * DOES NOT SAVE NEW POSTER TO DATABASE
-         * @param Request $request
-         * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-         */
-        public function new (Request $request) {
-
-            $validateData = $request->validate ([
-                                                    'author' => 'required|max:32',
-                                                    'quote'  => 'required|max:255',
-                                                ]);
-            $background_id = \request ('background_id');
+        private function setState ($poster_id, int $background_id,
+            string $quote, string $author, $text_overlay, string $design) {
             $background_image = Background::where ('id', '=', $background_id)
                 ->first ()->filename;
             $background_url = asset ('/images/backgrounds/'.$background_image);
-
-            // Get collection of bg images in storage
-            $bgImages = $this->listBackgrounds ();
-
-            $posterId = \request ('posterId');
-            $quote = $validateData['quote'];
-            $author = $validateData['author'];
-            $text_overlay = \request ('text_overlay');
-            $design = \request ('design');
             $overlay_class = 'quote-text__bg';
-            $designChoices = ['design_1', 'design_2', 'design_3', 'design_4',
-                'design_5'
-            ];
-
-            $state = [
-                'posterId'       => $posterId, // Needed for Update
-                'overlay_class'  => $overlay_class,
-                'background_url' => $background_url,
-                'background_id'  => $background_id,
-                'quote'          => $quote,
-                'author'         => $author,
-                'text_overlay'   => $text_overlay,
-                'design'         => $design,
-                'designChoices'  => $designChoices,
-                'backgrounds'    => $bgImages,
-            ];
-
-            return view ('pages.quotes.create', $state);
-        }
-
-        /**
-         * Method to edit a poster
-         * @param Request $request
-         * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-         */
-        public function edit (Request $request) {
-            $background_image = Background::where ('id', '=', $request['background_id'])
-                ->first ()->filename;
-            $overlay_class = 'quote-text__bg';
+            // List of designs available
             $designChoices = ['design_1', 'design_2', 'design_3', 'design_4',
                 'design_5'
             ];
             $backgrounds = $this->listBackgrounds ();
-            $state = [
-                'posterId'       => $request['posterId'],
+            return $state = [
+                'poster_id'      => $poster_id,
                 'overlay_class'  => $overlay_class,
-                'background_url' => asset ('/images/backgrounds/'
-                                           .$background_image),
-                'background_id'  => $request['background_id'],
-                'quote'          => $request['quote'],
-                'author'         => $request['author'],
-                'text_overlay'   => $request['text_overlay'],
-                'design'         => $request['design'],
+                'background_id'  => $background_id,
+                'background_url' => $background_url,
+                'quote'          => $quote,
+                'author'         => $author,
+                'text_overlay'   => $text_overlay,
+                'design'         => $design,
+                // Needed for designs selection
                 'designChoices'  => $designChoices,
+                // Needed for background selection
                 'backgrounds'    => $backgrounds
             ];
-            return view ('pages.quotes.create', $state);
         }
+
+        /**
+         * Method to GET the create route and initialize the form
+         * @param $request
+         * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+         */
+        public function print (Request $request) {
+            if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+                $poster_id = null;
+                $background_id = 1;
+                $quote = 'A nice quote for a nice day!';
+                $author = 'PrettyQuotes';
+                $text_overlay = 1;
+                $design = 'design_1';
+            }
+            else {
+                $validateData = $request
+                    ->validate (['author' => 'required|max:32', 'quote' => 'required|max:255']);
+                $poster_id = $request ['poster_id'];
+                $background_id = $request ['background_id'];
+                $quote = $validateData['quote'];
+                $author = $validateData['author'];
+                $text_overlay = $request ['text_overlay'];
+                $design = $request ['design'];
+            };
+            $state = $this->setState ($poster_id, $background_id, $quote,
+                                      $author, $text_overlay, $design);
+            return view ('pages.quotes.print', $state);
+        }
+
 
         /**
          * Method to construct the image filename

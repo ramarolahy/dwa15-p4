@@ -67,9 +67,9 @@
                                     <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect button-action button-action--delete float-right" type="button" data-toggle="modal" data-target="#{{'modal_delete_'.$poster->id}}">
                                         <i class="material-icons">delete</i>
                                     </button>
-                                    <form action="/edit" method="POST" enctype="multipart/form-data">
+                                    <form action="/print" method="POST" enctype="multipart/form-data">
                                         {{ csrf_field () }}
-                                        <input type="hidden" name="posterId" value="{{$poster->id}}">
+                                        <input type="hidden" name="poster_id" value="{{$poster->id}}">
                                         <input type="hidden" name="background_id" value="{{$poster->background_id}}">
                                         <input type="hidden" name="quote" value="{{$poster->quote}}">
                                         <input type="hidden" name="author" value="{{$poster->author}}">
@@ -121,7 +121,7 @@
                             </div>
                         @endif
                     @endforeach
-                    <a href="/create">
+                    <a href="/print">
                         <div class="mx-3 my-3" id="addButton" style="background-image:url('{{asset ('images/plus-square.svg')}}')">
                         </div>
                     </a>

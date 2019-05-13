@@ -7,7 +7,7 @@
     <div class="row pt-5">
         <!-- Form wrapper-->
         <div class="col-form col-5 pl-5">
-            <form method="POST" action="/new" enctype="multipart/form-data">
+            <form method="POST" action="/print">
                 {{ csrf_field () }}
                 {{-- Design choices radio buttons --}}
                 <div id="designSelection" class="card-body row wrap-card-body__radio py-0 px-0 mt-3 bg-light ">
@@ -28,7 +28,7 @@
                         </label>
                     @endforeach
                 </div>
-                <input type="hidden" name="posterId" value="{{$posterId}}">
+                <input type="hidden" name="poster_id" value="{{$poster_id}}">
                 <div class="card form-poster px-4 pb-2">
                     <!-- Background selection -->
                     <div class="card-body">
@@ -49,8 +49,8 @@
                                                    data-filename="{{$choice->filename}}"
                                                    value="{{$choice->id}}"
                                                    @if(old('background_id'))
-                                                   {{old('background_id') === strval($choice->id) ? 'checked' : null}}
-                                                   @elseif( $background_id === strval($choice->id) ) checked
+                                                   {{old('background_id') === $choice->id ? 'checked' : null}}
+                                                   @elseif( $background_id === $choice->id ) checked
                                                    @else {{$choice->id === 1 ? 'checked' : null}}
                                                    @endif
                                                    required>
@@ -164,7 +164,7 @@
                         </button>
                         <button class=" float-right mdl-button mdl-js-button mdl-button--raised
                                 mdl-js-ripple-effect mdl-button--accent text-white" type="submit">
-                            {{\Request::is('edit') ? 'Update text' : 'Display quote'}}
+                            Update quote
                         </button>
                     </div>
                     <div class="alert alert-danger mb-2 mt-4">* Required fields</div>
@@ -221,20 +221,24 @@
 
             <br>
             @if ( count($errors) == 0 and $quote)
-                <form id="form--save-poster" action="/save{{$posterId ? '/'.$posterId : null}}" method="POST" enctype="multipart/form-data">
-                    {{$posterId ? method_field('put') : null}}
+                <form id="form--save-poster" action="/save{{$poster_id ? '/'.$poster_id : null}}" method="POST" enctype="multipart/form-data">
+                    {{$poster_id ? method_field('put') : null}}
                     {{ csrf_field () }}
                     {{-- Cannot use type="hidden" if wanna hanlde these with JQuery --}}
-                    <input style="display: none;" id="posterId" name="posterId" value="{{$posterId}}">
+                    <input style="display: none;" id="poster_id" name="poster_id" value="{{$poster_id}}">
                     <input style="display: none;" id="background_id" name="background_id" value="{{$background_id}}">
                     <input style="display: none;" id="quote" name="quote" value="{{$quote}}">
                     <input style="display: none;" id="author" name="author" value="{{$author}}">
                     <input style="display: none;" id="text_overlay" name="text_overlay" value="{{$text_overlay}}">
                     <input style="display: none;" id="design" name="design" value="{{$design}}">
                     <input style="display: none;" id="file" name="file">
-                    <button id="button--save-poster" class=" float-right mdl-button mdl-js-button mdl-button--raised
+                    <button id="button--save-poster" class="float-right mx-3 mdl-button mdl-js-button mdl-button--raised
                                 mdl-js-ripple-effect mdl-button--accent text-white button-save" type="submit">
-                        {{\Request::is('edit') ? 'Update my poster' : 'Add to my collection'}}
+                        Save poster
+                    </button>
+                    <button id="cancel" class="float-right mdl-button mdl-js-button mdl-button--raised
+                                mdl-js-ripple-effect" href="/" type="button" onclick="window.location.href = '/';">
+                        Cancel
                     </button>
                 </form>
             @endif

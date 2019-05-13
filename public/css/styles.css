@@ -308,6 +308,7 @@ div.quote-text.design_5 {
     width: 608px;
 }
 
+/* FILE input */
 div.mdl-button.mdl-button--primary.mdl-button--icon.mdl-button--file {
     right: 0px;
 }
@@ -323,10 +324,6 @@ div.mdl-button.mdl-button--primary.mdl-button--icon.mdl-button--file {
     z-index: 4;
 }
 
-span.small {
-    color: darkseagreen;
-    font-size: 0.5em;
-}
 
 .mdl-textfield--file.mdl-textfield__input {
     box-sizing: border-box;
@@ -338,6 +335,10 @@ span.small {
     right: 0;
 }
 
+#quote {
+    min-height: 60px;
+    max-height: 150px;
+}
 
 div.alert.alert-danger {
     padding: 0;
@@ -352,15 +353,13 @@ div.alert.alert-danger {
     width: 300px;
 }
 
-.button-save {
+#button--save-poster {
+    background-color: #1f6fb2;
     width: auto;
-    position: relative;
-    left: -50%;
-    -webkit-transform: translateX(50%);
-    -moz-transform: translateX(50%);
-    -ms-transform: translateX(50%);
-    -o-transform: translateX(50%);
-    transform: translateX(50%);
+    right: 10px;
+}
+#cancel {
+    right: 10px;
 }
 
 
