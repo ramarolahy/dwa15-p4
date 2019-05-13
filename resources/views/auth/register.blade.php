@@ -75,10 +75,15 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" autocomplete="off" required>
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <div class="offset-4 col-md-6">
+                            <p class="text-center">Already have an account? <a href="/login">Login</a></p>
+                            </div>
+                        </div>
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="text-white mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
+                                <button type="submit" class="w-100 text-white mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
                                     {{ __('Register') }}
                                 </button>
                             </div>
