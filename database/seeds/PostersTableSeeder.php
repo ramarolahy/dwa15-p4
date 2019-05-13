@@ -13,10 +13,10 @@
         public function run () {
 
             $posters = [
-                [ 'Oscar Wilde', 'Be yourself; everyone else is already taken.', 'design_1', 1, 1, 'oscarwilde_beyourselfeveryone_31.png', 1 ],
-                [ 'Mahatma Gandhi', 'Be the change that you wish to see in the world.', 'design_1', 1, 3, 'mahatmagandhi_bethechange_21.png', 1 ],
-                [ 'Eleanor Roosevelt', 'No one can make you feel inferior without your consent.', 'design_1', 1, 2, 'eleanorroosevelt_noonecan_201.png', 2 ],
-                [ 'Mahatma Gandhi', 'Live as if you were to die tomorrow. Learn as if you were to live forever.', 'design_1', 1, 4, 'mahatmagandhi_liveasif_181.png', 2 ],
+                [ 'Oscar Wilde', 'Be yourself; everyone else is already taken.', 'design_1', 1, 3, 'oscarwilde_beyourselfeveryone_31.png', 1 ],
+                [ 'Mahatma Gandhi', 'Be the change that you wish to see in the world.', 'design_1', 1, 2, 'mahatmagandhi_bethechange_21.png', 1 ],
+                [ 'Eleanor Roosevelt', 'No one can make you feel inferior without your consent.', 'design_1', 1, 20, 'eleanorroosevelt_noonecan_201.png', 2 ],
+                [ 'Mahatma Gandhi', 'Live as if you were to die tomorrow. Learn as if you were to live forever.', 'design_1', 1, 18, 'mahatmagandhi_liveasif_181.png', 2 ],
             ];
 
             $count = count($posters);
