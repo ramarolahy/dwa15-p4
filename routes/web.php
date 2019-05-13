@@ -12,10 +12,11 @@
     Route::post ('/new', 'QuoteController@new')->name ('new');
     Route::group(['middleware' => 'auth'], function () {
         // CREATE
-
-        Route::post ('/save', 'QuoteController@save')->name ('save');
+        Route::get ('/save', 'QuoteController@create')->name ('save.get');
+        Route::post ('/save', 'QuoteController@save')->name ('save.post');
         // UPDATE
-        Route::post ('/edit', 'QuoteController@edit')->name ('edit');
+        Route::get ('/edit', 'QuoteController@create')->name ('edit.get');
+        Route::post ('/edit', 'QuoteController@edit')->name ('edit.post');
         Route::put ('/save/{posterId?}', 'QuoteController@save')->name ('save');
         // DELETE
         Route::delete ('/delete/{posterId}', 'QuoteController@delete')->name ('delete');
