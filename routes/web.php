@@ -1,7 +1,4 @@
 <?php
-    // I will add the home page once we have DB setup so I display any
-    // previously printd poster from different users
-    //Route::get ( '/', 'HomeController@Index')->name('pages.index');
 
     Auth::routes ();
     // READ
