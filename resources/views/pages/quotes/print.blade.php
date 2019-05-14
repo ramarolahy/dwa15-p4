@@ -4,7 +4,7 @@
 
 @section('content')
     <!-- App -->
-    <div class="row pt-5">
+    <div class="row row-main pt-5">
         <!-- Form wrapper-->
         <div class="col-form col-5 pl-5">
             <form method="POST" action="/print">
