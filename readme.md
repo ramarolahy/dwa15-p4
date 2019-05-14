@@ -22,18 +22,21 @@
 + league/flysystem-aws-s3-v3
 
 ## Feature summary
-+ Visitors can view  a list of quote posters created by other visitors.
-+ Visitors can Create, List, Update, and Delete posters.
++ Visitors can register for an account and log in to use the service.
++ Visitors can view  a list of quote posters they created, and others created.
++ Visitors can Create, List, Update, and Delete their own posters
 + Visitors can search for posters by author or by keyword.
-+ Visitors can share poster to their facebook account.
++ Visitors can share posters to their facebook account.
   
 ## Database summary
-+ My application has 2 tables in total (`backgrounds`, `posters`)
++ My application has 3 tables in total (`backgrounds`, `posters`, `users`)
 + There's a one-to-many relationship between `backgrounds` and `posters`
++ There's a one-to-many relationship between `users` and `posters`
 
 ## Code style divergences
 + My opening brackets are located at the end of function declarations.
 
 ## Notes for instructor
-The poster images are created after saving a poster from the poster maker, so you delete the seeders and then seed the app again, 
-the poster will be blank.
++ The interface is optimized for a 15" or above.
++ I am using JS for some client side functionality: background carousel selection, toggling through poster components and design.
++ All form validation are done server side / with html5 form validation.
