@@ -1,7 +1,12 @@
 @media only screen and (max-width: 1280px) {
+
     div.row.row-main {
         padding-top: 0.5rem !important;
         overflow-y: scroll;
+    }
+
+    #bottom_quote {
+        display: none;
     }
 }
 
@@ -28,6 +33,7 @@ body {
     background-image: url("../images/bg1.svg");
     background-repeat: no-repeat;
     background-position: center;
+    background-attachment: fixed;
     background-size: cover;
     height: 100vh;
     padding-top: 80px;
